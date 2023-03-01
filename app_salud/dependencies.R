@@ -1,0 +1,13 @@
+# This file allows packrat (used by rsconnect during deployment) to pick up dependencies.
+library(rhino)
+library(htmlwidgets)
+library(semantic.dashboard)
+library(leaflet)
+library(dplyr)
+library(openxlsx)
+library(echarts4r)
+library(utils)
+library(highcharter)
+library(shiny.i18n)
+library(shiny)
+library(bs4Dash)
