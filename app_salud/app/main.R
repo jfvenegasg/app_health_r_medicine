@@ -1,24 +1,13 @@
 # app/main.R
 
-# box::use(
-#   app/logic/plot_map[plot_leaflet_map],
-#   app/logic/e_chart,
-#   app/logic/high_1)
-
 box::use(
+  bs4Dash,
   shiny[moduleServer, NS, fluidRow, icon, h1],
   bs4Dash[
     dashboardPage,
     dashboardHeader, dashboardBody, dashboardSidebar,
     sidebarMenu, menuItem,box,tabItem,valueBox],
-  leaflet[
-    leafletOutput, renderLeaflet,
-    leaflet, setView, addTiles
-  ],
-  echarts4r,
-  utils,
-  highcharter,
-  bs4Dash)
+  utils)
 
 
 
@@ -68,37 +57,13 @@ ui <- function(id) {
       
       
     ))
-  # dashboardPage(
-  #   dashboardHeader(left = h1("Dashboard salud")),
-  #   dashboardSidebar(sidebarMenu(
-  #     menuItem(tabName = "panel 1", text = "panel_1"),
-  #     menuItem(tabName = "panel 2", text = "panel_2"),
-  #     menuItem(tabName = "panel 3", text = "panel_3"),
-  #     menuItem(tabName = "panel 4", text = "panel_4")
-  #   ), side = "top", visible = FALSE),
-  #   dashboardBody(
-  #     # fluidRow(width=12,
-  #     #          box(high_1$ui(ns("chart1")),width=12)
-  #     # ),
-  #     
-  #     # fluidRow(box(e_chart$ui(ns("chart")),width=12)),
-  #      fluidRow(width=12,
-  #               box(leafletOutput(ns("main_map")),width=12))
-  #     
-  #     
-  #   )
-  # )
+  
 }
 
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    # output$main_map <- renderLeaflet({ 
-    #   
-    #   plot_leaflet_map(z=12)  })
-    
-    # e_chart$server("chart")
-    # high_1$server("chart1")
+  
   })
 }
