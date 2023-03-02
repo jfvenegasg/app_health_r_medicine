@@ -1,12 +1,19 @@
 # app/main.R
 
 box::use(
+  app/logic/timeline,
+  app/logic/tabla_profesionales)
+
+
+box::use(
   bs4Dash,
+  timevis,
+  reactable,
   shiny[moduleServer, NS, fluidRow, icon, h1],
   bs4Dash[
     dashboardPage,
     dashboardHeader, dashboardBody, dashboardSidebar,
-    sidebarMenu, menuItem,box,tabItem,valueBox],
+    sidebarMenu, menuItem,box,tabItem,tabItems,valueBox],
   utils)
 
 
@@ -22,18 +29,18 @@ ui <- function(id) {
                        menuItem("Inicio",tabName = "menu1",
                                 icon=icon("laptop-medical")),
                        menuItem("Verificación de horario",tabName = "menu2",
-                                icon=icon("laptop-medical"),
+                                icon=icon("eye"),
                                 selected = TRUE),
                        menuItem("Seguimiento",tabName="menu3",
                                 icon=icon("hospital")),
                        menuItem("Profesionales",tabName="menu4",
-                                icon=icon("hospital")),
+                                icon=icon("user-doctor")),
                        menuItem("Estadisticas operaciones",tabName="menu5",
-                                icon=icon("hospital"))
+                                icon=icon("notes-medical"))
                        
                      )),
     dashboardBody(
-      tabItem(
+      tabItems(
         tabItem(tabName = "menu1",
                 
                 # Boxes need to be put in a row (or column)
@@ -52,7 +59,12 @@ ui <- function(id) {
                 fluidRow(width=12,box(width = 12,title = "Calendario",closable = FALSE,elevation = 2,
                                       status = "info",headerBorder = FALSE,collapsible = FALSE))
                 
-                )
+                ),
+        
+        tabItem(tabName = "menu3",
+                fluidRow(width=12,timeline$ui(ns("chart")))),
+        tabItem(tabName = "menu4",
+                fluidRow(width=12,tabla_profesionales$ui(ns("tabla_prof"))))
       )
       
       
@@ -64,6 +76,8 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
+    timeline$server("chart")
+    tabla_profesionales$server("tabla_prof")
   
   })
 }
