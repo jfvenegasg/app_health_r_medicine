@@ -3,21 +3,25 @@
 box::use(
   app/logic/timeline,
   app/logic/tabla_profesionales,
-  app/logic/mapa_de_calor)
+  app/logic/mapa_de_calor,
+  app/logic/calendario_semanal)
 
 
 box::use(
+  htmltools,
   bs4Dash,
   timevis,
   reactable,
   shiny[moduleServer, NS, fluidRow, icon, h1],
+  shiny,
   bs4Dash[
     dashboardPage,
     dashboardHeader, dashboardBody, dashboardSidebar,
     sidebarMenu, menuItem,box,tabItem,tabItems,valueBox],
   utils,
   calheatmapR,
-  dplyr)
+  dplyr,
+  toastui)
 
 
 
@@ -57,9 +61,12 @@ ui <- function(id) {
                                   valueBox(width = 3,value=2,color = "primary",subtitle="stat2",icon = icon("check")),
                                   valueBox(width = 3,value=3,color = "primary",subtitle="stat3",icon = icon("check")),
                                   valueBox(width = 3,value=4,color = "primary",subtitle="stat4",icon = icon("check"))),
-                fluidRow(width=12,box(width = 8,title = "Mapa de calor",closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
+
+                fluidRow(width=12,box(width = 12,title = "Mapa de calor",closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
-                fluidRow(width=12,box(width = 12,title = "Calendario",closable = FALSE,elevation = 2,
+            
+                fluidRow(width=12,box(width = 12,title = "Calendario",closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
+
                                       status = "info",headerBorder = FALSE,collapsible = FALSE))
                 
                 ),
@@ -82,6 +89,7 @@ server <- function(id) {
     timeline$server("chart")
     tabla_profesionales$server("tabla_prof")
     mapa_de_calor$server("calendarmap")
+    calendario_semanal$server("calendario")
   
   })
 }
