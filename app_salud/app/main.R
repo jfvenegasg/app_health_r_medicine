@@ -12,7 +12,7 @@ box::use(
   bs4Dash,
   timevis,
   reactable,
-  shiny[moduleServer, NS, fluidRow, icon, h1],
+  shiny[moduleServer, NS, fluidRow, icon, h1,h2],
   shiny,
   bs4Dash[
     dashboardPage,
@@ -57,10 +57,10 @@ ui <- function(id) {
         
         
         tabItem(tabName = "menu2",
-                fluidRow(width=12,valueBox(width = 3,value=1,color = "primary",subtitle="stat1",icon = icon("check")),
-                                  valueBox(width = 3,value=2,color = "secondary",subtitle="stat2",icon = icon("check")),
-                                  valueBox(width = 3,value=3,color = "success",subtitle="stat3",icon = icon("check")),
-                                  valueBox(width = 3,value=4,color = "warning",subtitle="stat4",icon = icon("check"))),
+                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+                                  valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
+                                  valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
+                                  valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
 
                 fluidRow(width=12,box(width = 12,title = "Mapa de calor",closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
