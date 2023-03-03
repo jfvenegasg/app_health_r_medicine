@@ -4,7 +4,8 @@ box::use(
   app/logic/timeline,
   app/logic/tabla_profesionales,
   app/logic/mapa_de_calor,
-  app/logic/calendario_semanal)
+  app/logic/calendario_semanal,
+  app/logic/estadísticas)
 
 
 box::use(
@@ -21,7 +22,8 @@ box::use(
   utils,
   calheatmapR,
   dplyr,
-  toastui)
+  toastui,
+  highcharter)
 
 
 
@@ -43,7 +45,16 @@ ui <- function(id) {
                        menuItem("Profesionales",tabName="menu4",
                                 icon=icon("user-doctor")),
                        menuItem("Estadisticas operaciones",tabName="menu5",
-                                icon=icon("notes-medical"))
+                                icon=icon("notes-medical"),
+                                bs4Dash::menuSubItem("Reporte quirófanos",tabName="menu5_1",
+                                            icon=icon("check-square"),
+                                            selected = FALSE), 
+                                bs4Dash::menuSubItem("Análisis supenciones",tabName="menu5_2",
+                                            icon=icon("chart-line"),
+                                            selected = FALSE),
+                                bs4Dash::menuSubItem("Duración cirugías",tabName="menu5_3",
+                                            icon=icon("chart-line"),
+                                            selected = FALSE))
                        
                      )),
     dashboardBody(
@@ -81,7 +92,12 @@ ui <- function(id) {
                          valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
                          valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
                 fluidRow(width=12,box(width=6,title="Tabla profesionales",height = "600",tabla_profesionales$ui(ns("tabla_prof"))),
-                                  box(width=6,title="Tabla pabellon",height = "600")))
+                                  box(width=6,title="Tabla pabellon",height = "600"))),
+        tabItem(tabName = "menu5_1",
+                
+                fluidRow(width=12,box(width = 10,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, estadísticas$ui(ns("grafico1")),
+                                      status = "primary",headerBorder = FALSE,collapsible = FALSE)
+                ))
       )
       
       
@@ -97,6 +113,7 @@ server <- function(id) {
     tabla_profesionales$server("tabla_prof")
     mapa_de_calor$server("calendarmap")
     calendario_semanal$server("calendario")
+    estadísticas$server("grafico1")
   
   })
 }
