@@ -58,9 +58,9 @@ ui <- function(id) {
         
         tabItem(tabName = "menu2",
                 fluidRow(width=12,valueBox(width = 3,value=1,color = "primary",subtitle="stat1",icon = icon("check")),
-                                  valueBox(width = 3,value=2,color = "primary",subtitle="stat2",icon = icon("check")),
-                                  valueBox(width = 3,value=3,color = "primary",subtitle="stat3",icon = icon("check")),
-                                  valueBox(width = 3,value=4,color = "primary",subtitle="stat4",icon = icon("check"))),
+                                  valueBox(width = 3,value=2,color = "secondary",subtitle="stat2",icon = icon("check")),
+                                  valueBox(width = 3,value=3,color = "success",subtitle="stat3",icon = icon("check")),
+                                  valueBox(width = 3,value=4,color = "warning",subtitle="stat4",icon = icon("check"))),
 
                 fluidRow(width=12,box(width = 12,title = "Mapa de calor",closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),

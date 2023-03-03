@@ -24,8 +24,9 @@ server <- function(id) {
     
     output$calendarmap <- calheatmapR$renderCalheatmapR(
       
-      names(list(1, 10, 100)) |> c(as.numeric(as.POSIXct("2001-01-01")), as.numeric(as.POSIXct("2001-01-02")), as.numeric(as.POSIXct("2001-01-03"))) |>       
-      calheatmapR::calheatmapR() |> 
+    
+      
+      calheatmapR::calheatmapR(data = readRDS("app/logic/data/data.RData")) |> 
           calheatmapR::chDomain(domain = "month", subDomain = "day", start = "2000-12-01", range = 12,cellSize = 20,gutter = 10)
       
 
