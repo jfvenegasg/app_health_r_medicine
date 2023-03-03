@@ -72,9 +72,16 @@ ui <- function(id) {
                 ),
         
         tabItem(tabName = "menu3",
-                fluidRow(width=12,timeline$ui(ns("chart")))),
+                fluidRow(width=12,timeline$ui(ns("chart")),
+                fluidRow(width=12,box(width=12,title="Linea de tiempo",height = "300",
+                                      status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)))),
         tabItem(tabName = "menu4",
-                fluidRow(width=12,tabla_profesionales$ui(ns("tabla_prof"))))
+                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
+                fluidRow(width=12,box(width=6,title="Tabla profesionales",height = "600",tabla_profesionales$ui(ns("tabla_prof"))),
+                                  box(width=6,title="Tabla pabellon",height = "600")))
       )
       
       

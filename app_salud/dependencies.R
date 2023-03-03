@@ -15,3 +15,5 @@ library(timevis)
 library(reactable)
 library(MASS)
 library(calheatmapR)
+library(sparkline)
+
