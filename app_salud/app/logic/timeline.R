@@ -13,7 +13,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    h3("Seguimiento agenda"),
+   
     timevis$timevisOutput(ns("chart"))
   )
 }

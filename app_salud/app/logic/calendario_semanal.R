@@ -41,17 +41,17 @@ server <- function(id) {
   })
   
   shiny::observeEvent(input$calendario_add, {
-    str(input$calendario_add)
+    utils::str(input$calendario_add)
     toastui::cal_proxy_add("calendario", input$calendario_add)
   })
   
   shiny::observeEvent(input$calendario_update, {
-    str(input$calendario_update)
+    utils::str(input$calendario_update)
     toastui::cal_proxy_update("calendario", input$calendario_update)
   })
   
   shiny::observeEvent(input$calendario_delete, {
-    str(input$calendario_delete)
+    utils::str(input$calendario_delete)
     toastui::cal_proxy_delete("calendario", input$calendario_delete)
   })
   

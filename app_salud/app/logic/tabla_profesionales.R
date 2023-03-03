@@ -14,7 +14,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    h3("Seguimiento agenda"),
+
     reactable$reactableOutput(ns("tabla_prof"))
   )
 }
