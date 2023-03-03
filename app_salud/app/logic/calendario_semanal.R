@@ -19,25 +19,45 @@ ui <- function(id) {
   tagList(
     h3("Calendario"),
     toastui$calendarOutput(ns("calendario"))
-  )
+  ) 
 }
-
 #' @export
+
+#> Warning: `bindFillRole()` only works on htmltools::tag() objects (e.g., div(), p(), etc.), not objects of type 'shiny.tag.list'. 
+
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    output$calendario <- toastui$renderCalendar(
-      toastui::calendar(toastui::cal_demo_data("week"), view = "week", defaultDate = Sys.Date()) |> 
-        toastui::cal_week_options(
-          startDayOfWeek = 1,
-          workweek = TRUE
-        ) |> 
-        toastui::cal_props(toastui::cal_demo_props()) |>
-
-      toastui::cal_schedules(
-        title = "My schedule",
-        start = format(Sys.Date(), "%Y-%m-03 00:00:00"),
-        end = format(Sys.Date(), "%Y-%m-17 00:00:00")
-      ))
-    
+  
+  output$calendario <- toastui::renderCalendar({
+    toastui::calendar(toastui::cal_demo_data("week"), view = "week",
+      defaultDate = Sys.Date(),
+      navigation = TRUE,
+      isReadOnly = FALSE,
+      useCreationPopup = TRUE) |>
+      toastui::cal_week_options(
+        startDayOfWeek = 1,
+        workweek = TRUE) |>
+      toastui::cal_props(toastui::cal_demo_props())
   })
-}
+  
+  shiny::observeEvent(input$calendario_add, {
+    str(input$calendario_add)
+    toastui::cal_proxy_add("calendario", input$calendario_add)
+  })
+  
+  shiny::observeEvent(input$calendario_update, {
+    str(input$calendario_update)
+    toastui::cal_proxy_update("calendario", input$calendario_update)
+  })
+  
+  shiny::observeEvent(input$calendario_delete, {
+    str(input$calendario_delete)
+    toastui::cal_proxy_delete("calendario", input$calendario_delete)
+  })
+  
+})}
+
+if (interactive())
+  shiny::shinyApp(ui = ui, server = server)
+
+
