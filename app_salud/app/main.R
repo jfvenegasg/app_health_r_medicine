@@ -36,10 +36,10 @@ ui <- function(id) {
                      sidebarMenu(
                        id = "sidebar",
                        menuItem("Inicio",tabName = "menu1",
-                                icon=icon("laptop-medical")),
-                       menuItem("Verificación de horario",tabName = "menu2",
-                                icon=icon("eye"),
+                                icon=icon("laptop-medical"),
                                 selected = TRUE),
+                       menuItem("Verificación de horario",tabName = "menu2",
+                                icon=icon("eye")),
                        menuItem("Seguimiento",tabName="menu3",
                                 icon=icon("hospital")),
                        menuItem("Profesionales",tabName="menu4",
