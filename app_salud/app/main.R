@@ -70,7 +70,7 @@ ui <- function(id) {
                          bs4Dash::infoBox(width = 4,title = shiny::h3("Profesionales", style = 'font-size:30px'),subtitle="En este menú se puede ver la disponibilidad de profesionales", 
                                           icon=shiny::icon("arrow-pointer"), tabName = "menu4",color = "success",fill=FALSE, iconElevation = 2,elevation = 2)),
                 fluidRow(width=12,
-                shiny::h2(class = "divider", shiny::div(class = "content",icon("chart-line"),"Estadísticas operacionales________________________________________________"))
+                shiny::h2(class = "divider", shiny::div(class = "content",icon("chart-line"),"Estadísticas operacionales"))
                 ),
                 fluidRow(width=12,
                          bs4Dash::infoBox(width = 4,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
