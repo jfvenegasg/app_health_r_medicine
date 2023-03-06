@@ -26,18 +26,27 @@ server <- function(id) {
       # This issue should be solved in the next `box` release.
         
       
-      data.frame(
-        id      = 1:4,
-        content = c("Item one", "Item two",
-                    "Ranged item", "Item four"),
-        start   = c("2016-01-10", "2016-01-11",
-                    "2016-01-20", "2016-02-14 15:00:00"),
-        end     = c(NA, NA, "2016-02-04", NA)
-      ) |>
-      
-      timevis::timevis()
       
       
+      
+      timevis::timevis(data = data.frame(
+        id = 1:11,
+        content = c("Operación 1", "Operación 2",
+                    "Operación 3", "Operación 4", "Operación 5",
+                    "Operación 6", "Operación 7", "Operación 8", "Operación 9", "Operación 10",
+                    "Operación 11"),
+        start = c(Sys.Date(),  Sys.Date()-1,Sys.Date()+1, Sys.Date()-1, Sys.Date()+2,
+                  Sys.Date()+2,Sys.Date()+3, Sys.Date()-1,Sys.Date()+3, Sys.Date()+1,
+                  Sys.Date()),
+        end   = c(Sys.Date()+2,Sys.Date()+2,Sys.Date()+3, Sys.Date()+4, Sys.Date()+4,
+                  Sys.Date()+5,Sys.Date()+6, Sys.Date()+2,Sys.Date()+5, Sys.Date()+5,
+                  Sys.Date()+6),
+        group = c(rep("Pabellon 1", 3), rep("Pabellon 2", 3), rep("Pabellon 3", 5)),
+        type = c(rep("range", 11))
+      ),       
+              groups = data.frame(id = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5"),
+                                  content = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5"))) 
+     
             # # rhino::rhinos |>
       #   echarts4r$group_by(Species) |>
       #  echarts4r$e_x_axis(x1)
