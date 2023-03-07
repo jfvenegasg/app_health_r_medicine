@@ -5,7 +5,8 @@ box::use(
   app/logic/tabla_profesionales,
   app/logic/mapa_de_calor,
   app/logic/calendario_semanal,
-  app/logic/estadísticas)
+  app/logic/estadísticas,
+  app/global)
 
 
 box::use(
@@ -13,7 +14,7 @@ box::use(
   bs4Dash,
   timevis,
   reactable,
-  shiny[moduleServer, NS, fluidRow, icon, h1,h2],
+  shiny[moduleServer, NS, fluidRow, icon, h1,h2,tags,observeEvent,renderPrint,actionButton],
   shiny,
   bs4Dash[
     dashboardPage,
@@ -23,7 +24,9 @@ box::use(
   calheatmapR,
   dplyr,
   toastui,
-  highcharter)
+  highcharter,
+  config,
+  polished)
 
 
 
@@ -31,7 +34,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   dashboardPage(
-    dashboardHeader(title = "Dashboard"),
+    dashboardHeader(title = "Sistema de gestion HBV"),
     dashboardSidebar(side = "top", visible = FALSE,
                      sidebarMenu(
                        id = "sidebar",
@@ -54,7 +57,12 @@ ui <- function(id) {
                                             selected = FALSE),
                                 bs4Dash::menuSubItem("Duración cirugías",tabName="menu5_3",
                                             icon=icon("chart-line"),
-                                            selected = FALSE))
+                                            selected = FALSE)),
+                       actionButton(
+                         "sign_out",
+                         "Sign Out",
+                         icon = icon("sign-out-alt"),
+                         class = "pull-right")
                        
                      )),
     dashboardBody(
@@ -121,10 +129,14 @@ ui <- function(id) {
                                 valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
                 )))
      
-      
-    )))
-}  
-
+     
+    )
+    
+    ))
+  
+ 
+  }
+polished::secure_ui(ui)
 
 #' @export
 server <- function(id) {
@@ -135,6 +147,21 @@ server <- function(id) {
     mapa_de_calor$server("calendarmap")
     calendario_semanal$server("calendario")
     estadísticas$server("grafico1")
-  
+
+    output$secure_content <- renderPrint({
+      session$userData$user()
+    })
+    
+    
+    observeEvent(input$sign_out, {
+      
+      polished::sign_out_from_shiny(session)
+      session$reload()
+      
+    })
+      
   })
+  
+  
 }
+polished::secure_server(server)
