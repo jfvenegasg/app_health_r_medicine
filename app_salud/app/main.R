@@ -55,19 +55,16 @@ ui <- function(id) {
                                             selected = FALSE),
                                 bs4Dash::menuSubItem("Duración cirugías",tabName="menu5_3",
                                             icon=icon("chart-line"),
-<<<<<<< HEAD
                                             selected = FALSE)),
+                                bs4Dash::menuSubItem("Profesionales",tabName="menu5_4",
+                                                     icon=icon("user-doctor"),
+                                                     selected = FALSE),
                        actionButton(
                          "sign_out",
                          "Sign Out",
                          icon = icon("sign-out-alt"),
-                         class = "pull-right")
-=======
-                                            selected = FALSE),
-                                bs4Dash::menuSubItem("Profesionales",tabName="menu5_4",
-                                                     icon=icon("user-doctor"),
-                                                     selected = FALSE))
->>>>>>> 89269e809db4e35d851edca378f5000b885969bf
+                         class = "pull-right",selected = FALSE)
+                                
                        
                      )),
     dashboardBody(
