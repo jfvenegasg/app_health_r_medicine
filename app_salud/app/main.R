@@ -26,7 +26,8 @@ box::use(
   toastui,
   highcharter,
   config,
-  polished)
+  polished,
+  shinyWidgets)
 
 
 
@@ -152,17 +153,14 @@ server <- function(id) {
     calendario_semanal$server("calendario")
     estadísticas$server("grafico1")
 
-    output$secure_content <- renderPrint({
-      session$userData$user()
-    })
-    
-    
-    observeEvent(input$sign_out, {
-      
-      polished::sign_out_from_shiny(session)
-      session$reload()
-      
-    })
+    shinyWidgets::show_toast(
+      title = "Sistema de gestion HBV",
+      text = "Este dashboard es solo una version de prueba",
+      type = "info",
+      position = "top",
+      timer=5000,
+      width = "800"
+    )
       
   })
   
