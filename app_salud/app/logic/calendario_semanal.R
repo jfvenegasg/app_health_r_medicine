@@ -17,7 +17,6 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    h3("Calendario"),
     toastui$calendarOutput(ns("calendario"))
   ) 
 }

@@ -13,7 +13,6 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    h3("Seguimiento agenda"),
     calheatmapR$calheatmapROutput(ns("calendarmap"))
   )
 }
@@ -27,7 +26,7 @@ server <- function(id) {
     
       
       calheatmapR::calheatmapR(data = readRDS("app/logic/data/data.RData")) |> 
-          calheatmapR::chDomain(domain = "month", subDomain = "day", start = "2000-12-01", range = 12,cellSize = 20,gutter = 0,margin = 13)
+          calheatmapR::chDomain(domain = "month", subDomain = "day", start = "2000-12-01", range = 12,cellSize = 15,gutter = 0,margin = 5)
       
 
     )

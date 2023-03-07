@@ -91,10 +91,10 @@ ui <- function(id) {
                                   valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
                                   valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
 
-                fluidRow(width=12,box(width = 12,title = "Mapa de calor",closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
+                fluidRow(width=12,box(width = 12,title = shiny::h3("Mapa de calor agenda pabellones"),closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
             
-                fluidRow(width=12,box(width = 12,title = "Calendario",closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
+                fluidRow(width=12,box(width = 12,title = shiny::h3("Calendario"),closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
 
                                       status = "info",headerBorder = FALSE,collapsible = FALSE))
                 
