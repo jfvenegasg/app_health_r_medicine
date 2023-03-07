@@ -15,7 +15,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugia general"="esp1","Cirugia Pediatrica"="esp2")),
+    selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
     highcharter$highchartOutput(ns("histograma"))
   )
 }
@@ -28,7 +28,7 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     output$histograma<- highcharter::renderHighchart({
-      highcharter::hchart(tiempo$Minutos, type = "area", name = "Demanda")
+      highcharter::hchart(subset(tiempo,Especialidad==input$selector_1)[,2], type = "area", name = "Demanda")
     })
       
     
