@@ -26,7 +26,8 @@ server <- function(id) {
     
       
       calheatmapR::calheatmapR(data = readRDS("app/logic/data/data.RData")) |> 
-          calheatmapR::chDomain(domain = "month", subDomain = "day", start = "2000-12-01", range = 12,cellSize = 15,gutter = 0,margin = 5)
+          calheatmapR::chDomain(domain = "month", subDomain = "day", start = "2023-01-01", range = 12,cellSize = 15,gutter = 0,margin = 5) 
+        
       
 
     )

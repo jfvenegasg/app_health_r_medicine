@@ -2,15 +2,16 @@
 
 box::use(
   timevis,
-  shiny[h3, moduleServer, NS, tagList,selectInput,reactive,observe,HTML,p],
+  shiny[h3, moduleServer, NS, tagList,selectInput,reactive,observe,HTML,p,icon,h2],
   dplyr,
   utils,
   base,
-  htmltools
+  htmltools,
+  shinycssloaders[withSpinner],
+  bs4Dash
 )
 box::use(
-   app/logic/pabellon[pabellon],
- )
+   app/logic/pabellon[pabellon])
 
 #source("app_salud/app/logic/pabellon.R")
 
@@ -20,9 +21,13 @@ ui <- function(id) {
   
   ns <- NS(id)
   tagList(
+    bs4Dash::valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+    bs4Dash::valueBox(width = 3,value=h2(2),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
+    bs4Dash::valueBox(width = 3,value=h2(170),color = "success",subtitle="Horas disponibles",icon = icon("check")),
+    bs4Dash::valueBox(width = 3,value=h2(200),color = "warning",subtitle="Horas no disponibles",icon = icon("check")),
     selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugia general"="esp1","Cirugia Pediatrica"="esp2")),
     
-    timevis$timevisOutput(ns("chart"))
+    timevis$timevisOutput(ns("linea_de_tiempo"))
   )
 }
 
@@ -32,7 +37,7 @@ server <- function(id) {
     
     #pab<-pabellon(especialidad = reactive(get(input$selector_1)))
     
-    output$chart <- timevis$renderTimevis(
+    output$linea_de_tiempo <- timevis$renderTimevis(
       # Datasets are the only case when you need to use :: in `box`.
       # This issue should be solved in the next `box` release.
       
