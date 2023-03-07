@@ -2,18 +2,26 @@
 
 box::use(
   timevis,
-  shiny[h3, moduleServer, NS, tagList],
+  shiny[h3, moduleServer, NS, tagList,selectInput,reactive,observe,HTML,p],
   dplyr,
-  utils
+  utils,
+  base,
+  htmltools
 )
+box::use(
+   app/logic/pabellon[pabellon],
+ )
+
+#source("app_salud/app/logic/pabellon.R")
 
 
 #' @export
 ui <- function(id) {
-  ns <- NS(id)
   
+  ns <- NS(id)
   tagList(
-   
+    selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugia general"="esp1","Cirugia Pediatrica"="esp2")),
+    
     timevis$timevisOutput(ns("chart"))
   )
 }
@@ -21,36 +29,32 @@ ui <- function(id) {
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
+    
+    #pab<-pabellon(especialidad = reactive(get(input$selector_1)))
+    
     output$chart <- timevis$renderTimevis(
       # Datasets are the only case when you need to use :: in `box`.
       # This issue should be solved in the next `box` release.
-        
-      
-      
-      
       
       timevis::timevis(data = data.frame(
-        id = 1:11,
-        content = c("Operación 1", "Operación 2",
-                    "Operación 3", "Operación 4", "Operación 5",
-                    "Operación 6", "Operación 7", "Operación 8", "Operación 9", "Operación 10",
-                    "Operación 11"),
-        start = c("2023-03-06 07:30:00",  "2023-03-04 07:30:00","2023-03-05 07:30:00", "2023-03-07 07:30:00", "2023-03-08 07:30:00",
-                  "2023-03-09 07:30:00","2023-03-03 07:30:00", "2023-03-04 07:30:00","2023-03-07 07:30:00", "2023-03-06 07:30:00",
-                  "2023-03-06 07:30:00"),
-        end   = c("2023-03-06 10:30:00",  "2023-03-04 13:30:00","2023-03-05 14:30:00", "2023-03-07 09:30:00", "2023-03-08 18:30:00",
-                  "2023-03-09 12:30:00","2023-03-03 18:30:00", "2023-03-04 19:30:00","2023-03-07 14:30:00", "2023-03-06 15:30:00",
-                  "2023-03-06 17:30:00"),
-        group = c(rep("Pabellon 1", 3), rep("Pabellon 2", 3), rep("Pabellon 3", 5)),
-        type = c(rep("range", 11))
+        id = pabellon(especialidad=input$selector_1)[[1]],
+        content  = pabellon(especialidad=input$selector_1)[[2]],
+        
+        start = pabellon(especialidad=input$selector_1)[[3]],
+        
+        end   = pabellon(especialidad=input$selector_1)[[4]],
+        
+        group = c(rep("Pabellon 1", pabellon(especialidad=input$selector_1)[[5]]), rep("Pabellon 2", pabellon(especialidad=input$selector_1)[[5]]), rep("Pabellon 3", pabellon(especialidad=input$selector_1)[[5]])),
+        
+        type = c(rep("range", pabellon(especialidad=input$selector_1)[[6]]))
+        
       ),       
-              groups = data.frame(id = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5"),
-                                  content = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5"))) 
-     
-            # # rhino::rhinos |>
-      #   echarts4r$group_by(Species) |>
-      #  echarts4r$e_x_axis(x1)
-      # echarts4r$e_tooltip()
+        groups = data.frame(id = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5"),
+                                  content = c("Pabellon 1", "Pabellon 2", "Pabellon 3","Pabellon 4","Pabellon 5")),
+      options = list(selectable=TRUE,editable=list(add=TRUE,updateTime=TRUE,updateGroup=TRUE,remove=TRUE,overrideItems=TRUE),
+                     orientation = "top",multiselect=TRUE,clickToUse=TRUE,horizontalScroll=TRUE,zoomKey='altKey',moveable=TRUE)) 
+      
+      
     )
   })
 }
