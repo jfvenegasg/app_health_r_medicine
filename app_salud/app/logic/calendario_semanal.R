@@ -20,6 +20,9 @@ ui <- function(id) {
     toastui$calendarOutput(ns("calendario"))
   ) 
 }
+
+datoscalendario<-xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 3, rowIndex = 1:22, colIndex= 1:6
+                            , as.data.frame = TRUE, header = TRUE)
 #' @export
 
 #> Warning: `bindFillRole()` only works on htmltools::tag() objects (e.g., div(), p(), etc.), not objects of type 'shiny.tag.list'. 
@@ -28,7 +31,7 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
   
   output$calendario <- toastui::renderCalendar({
-    toastui::calendar(toastui::cal_demo_data("week"), view = "week",
+    toastui::calendar(datoscalendario, view = "week",
       defaultDate = Sys.Date(),
       navigation = TRUE,
       isReadOnly = FALSE,
