@@ -6,6 +6,7 @@ box::use(
   app/logic/mapa_de_calor,
   app/logic/calendario_semanal,
   app/logic/estadísticas,
+  app/logic/tiempo_cirugía,
   app/global)
 
 
@@ -131,7 +132,19 @@ ui <- function(id) {
                                 valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
                                 valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
                                 valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
-                )))
+                ))),
+        
+        tabItem(tabName = "menu5_2",
+                
+                fluidRow(width=12,
+                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
+                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                         bs4Dash:: column(width = 3,
+                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
+                         )))
+        
      
      
     )
@@ -151,6 +164,7 @@ server <- function(id) {
     mapa_de_calor$server("calendarmap")
     calendario_semanal$server("calendario")
     estadísticas$server("grafico1")
+    tiempo_cirugía$server("histograma")
 
     output$secure_content <- renderPrint({
       session$userData$user()

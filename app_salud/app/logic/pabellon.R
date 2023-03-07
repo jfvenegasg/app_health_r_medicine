@@ -1,7 +1,8 @@
 # app/logic/pabellon.R
 
 box::use(
-  lubridate)
+  lubridate,
+  xlsx)
 
 
 #' @export
@@ -51,3 +52,4 @@ pabellon <- function(especialidad) {
   
   return(pab)
 }
+
