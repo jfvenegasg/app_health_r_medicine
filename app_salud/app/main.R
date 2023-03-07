@@ -28,7 +28,8 @@ box::use(
   highcharter,
   config,
   polished,
-  shinyWidgets)
+  shinyWidgets,
+  shinycssloaders)
 
 
 
@@ -75,9 +76,9 @@ ui <- function(id) {
                 
                 # Boxes need to be put in a row (or column)
                 fluidRow(width=12,
-                         bs4Dash::infoBox(width = 6,title = shiny::h3("Horario pabellones", style = 'font-size:30px'),subtitle="Este menú permite agregar, editar y eliminar citas para cirugía", 
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Horario pabellones", style = 'font-size:30px'),subtitle="Este menú permite agregar, editar y eliminar citas para cirugía", 
                                           icon=shiny::icon("arrow-pointer"), tabName = "menu2",color = "primary",fill=FALSE, iconElevation = 2,elevation = 2),
-                         bs4Dash::infoBox(width = 6,title = shiny::h3("Verificación de horario", style = 'font-size:30px'),subtitle="Este menú permite ver los horarios disponibles de pabellones y especialidades médicas", 
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Verificación de horario", style = 'font-size:30px'),subtitle="Este menú permite ver los horarios disponibles de pabellones y especialidades médicas", 
                                           icon=shiny::icon("arrow-pointer"), tabName = "menu3",color = "info",fill=FALSE, iconElevation = 2,elevation = 2)),
                          
                 fluidRow(width=12,
@@ -112,9 +113,9 @@ ui <- function(id) {
                 ),
         
         tabItem(tabName = "menu3",
-                fluidRow(width=12,timeline$ui(ns("chart")),
+                fluidRow(width=12,timeline$ui(ns("linea_de_tiempo"))),
                 fluidRow(width=12,box(width=12,title="Linea de tiempo",height = "300",
-                                      status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)))),
+                                      status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))),
         tabItem(tabName = "menu5_4",
                 fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
                          valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
@@ -160,7 +161,7 @@ polished::secure_ui(ui)
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    timeline$server("chart")
+    timeline$server("linea_de_tiempo")
     tabla_profesionales$server("tabla_prof")
     mapa_de_calor$server("calendarmap")
     calendario_semanal$server("calendario")

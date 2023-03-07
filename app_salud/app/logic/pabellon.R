@@ -10,7 +10,7 @@ pabellon <- function(especialidad) {
   
   if(especialidad=="esp1"){
     
-    contenido<-c("Operación 1","Operación 3", "Operación 5","Operación 7", "Operación 9","Operación 11")
+    contenido<-c("Disponible","Disponible", "Disponible","Disponible", "Disponible","Disponible")
     inicio<-c(lubridate::ymd_hms(Sys.time()) ,
               lubridate::ymd_hms(Sys.time()+lubridate::hours(3)),
               lubridate::ymd_hms(Sys.time()+lubridate::hours(6)),
@@ -29,7 +29,7 @@ pabellon <- function(especialidad) {
   type<-6
   }else if(especialidad=="esp2"){
   
-  contenido<-c("Operación 2","Operación 4","Operación 6","Operación 8","Operación 10","Operación 12")
+  contenido<-c("Disponible","Disponible", "Disponible","Disponible", "Disponible","Disponible")
   inicio<-c(lubridate::ymd_hms(Sys.time()+lubridate::hours(3)), 
             lubridate::ymd_hms(Sys.time()+lubridate::hours(9)),
             lubridate::ymd_hms(Sys.time()+lubridate::hours(15)),
