@@ -101,13 +101,19 @@ server <- function(id) {
                    "Falta medicamentos / stock insuficiente",
                    "Emergencia sanitaria COVID-19: Resguardo de usuarios y personal de salud"
         ),
-        value = ceiling(stats::rnorm(35, 10, 1)),
+        value = c(279,140,65,42,53,62,
+                  56,18,22,16,19,13,20,18,9,11,7,4,2,1,1,
+                  89,28,18,5,
+                  24,32,7,2,
+                  20,11,8,2,1,53),
         stringsAsFactors = FALSE)
       
       sankey |> 
         echarts4r::e_charts() |> 
         echarts4r::e_sankey(source, target, value) |> 
-        echarts4r::e_title("Sankey chart")
+        echarts4r::e_title("Sankey chart") |>
+        echarts4r::e_dims(height = "900", width = "auto")
+      
       
       
       

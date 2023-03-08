@@ -147,7 +147,7 @@ ui <- function(id) {
         tabItem(tabName = "menu5_4",
                 fluidRow(width=12,box(grafico_barra$ui(ns("grafico_barra")),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),bs4Dash::column(width=3,valueBox(width = 12,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
                                                                                                                                                                              valueBox(width = 12,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")))),
-                fluidRow(width=12,box(grafico_sankey$ui(ns("grafico_sankey")),width=12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)),
+                fluidRow(width=12,box(grafico_sankey$ui(ns("grafico_sankey")),width=12,height="900px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)),
                 fluidRow(width=12,box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
                          box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
                 
