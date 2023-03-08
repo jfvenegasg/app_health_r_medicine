@@ -6,7 +6,8 @@ box::use(
   shiny[h3, moduleServer, NS, tagList],
   dplyr,
   utils,
-  echarts4r
+  echarts4r,
+  stats
 )
 
 
@@ -27,15 +28,23 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     output$grafico_sankey<- echarts4r$renderEcharts4r({ 
       
-      xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 15:37, colIndex= 5:7
-                      , as.data.frame = TRUE, header = TRUE) |> 
-        echarts4r::group_by(Tipo.de.hora) |>
-        echarts4r::e_chart(Mes) |>
-        echarts4r::e_bar(Valor) |>
-        echarts4r::e_mark_p(type = "line",
-                            data = list(yAxis = 0.6), 
-                            title = "Line at 50") |>
-        echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
+      # xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 15:37, colIndex= 5:7
+      #                 , as.data.frame = TRUE, header = TRUE) |> 
+      #   echarts4r::group_by(Tipo.de.hora) |>
+      #   echarts4r::e_chart(Mes) |>
+      #   echarts4r::e_bar(Valor) |>
+      #   echarts4r::e_mark_p(type = "line",
+      #                       data = list(yAxis = 0.6), 
+      #                       title = "Line at 50") |>
+      #   echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
+      data.frame(
+        source = c("suspensiones","paciente","paciente","suspensiones","Equipo Quirurgico","Equipo Quirurgico"),
+        target = c("paciente", "Patologia Aguda", "No se presenta","Equipo Quirurgico","Prolongación de tabla","Falta disponibilidad"),
+        value = ceiling(stats::rnorm(6, 10, 1)),
+        stringsAsFactors = FALSE) |> 
+        echarts4r::e_charts() |> 
+        echarts4r::e_sankey(source, target, value) |> 
+        echarts4r::e_title("Sankey chart")
       
       
     })
