@@ -113,22 +113,17 @@ ui <- function(id) {
                 fluidRow(width=12,
                          box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, grafico$ui(ns("grafico")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                         
                          bs4Dash:: column(width = 3,
-<<<<<<< HEAD
                                 valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
                                 valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
-                                valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "purple",icon = icon("check"))
-                ))),
-=======
-                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
-                         )),
-                         
+                                valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "purple",icon = icon("check"))),
+
+                                        
                          box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tabla$ui(ns("tabla")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
-                         ),
->>>>>>> 06d043caa0cf87f4aa5df14b78bea03865bbf14f
+                             status = "primary",headerBorder = FALSE,collapsible = FALSE)
+                         )),
+
         
         tabItem(tabName = "menu5_3",
                 
@@ -138,8 +133,9 @@ ui <- function(id) {
                          bs4Dash:: column(width = 3,
                                           valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
-                         ))),
+                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check")))
+                         )),
+        
         tabItem(tabName = "menu5_4",
                 fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
                          valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
