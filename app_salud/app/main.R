@@ -10,8 +10,8 @@ box::use(
   app/logic/tiempo_cirugía,
   app/logic/carga_imagen,
   app/logic/analisis_de_suspensiones/grafico_barra,
-  app/logic/analisis_de_suspensiones/grafico_sankey)
-
+  app/logic/analisis_de_suspensiones/grafico_sankey
+  )
 
 box::use(
   htmltools,
