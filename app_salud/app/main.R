@@ -44,24 +44,20 @@ ui <- function(id) {
                        menuItem("Inicio",tabName = "menu1",
                                 icon=icon("laptop-medical"),
                                 selected = TRUE),
-                       menuItem("Horario pabellones",tabName = "menu2",
-                                icon=icon("eye")),
-                       menuItem("Verificación de horario",tabName="menu3",
-                                icon=icon("hospital")),
-                       menuItem("Estadisticas operaciones",tabName="menu5",
-                                icon=icon("notes-medical"),
-                                bs4Dash::menuSubItem("Reporte quirófanos",tabName="menu5_1",
-                                            icon=icon("check-square"),
-                                            selected = FALSE), 
-                                bs4Dash::menuSubItem("Análisis suspenciones",tabName="menu5_2",
-                                            icon=icon("chart-line"),
-                                            selected = FALSE),
-                                bs4Dash::menuSubItem("Duración cirugías",tabName="menu5_3",
-                                            icon=icon("chart-line"),
-                                            selected = FALSE),
-                                bs4Dash::menuSubItem("Profesionales",tabName="menu5_4",
-                                                     icon=icon("user-doctor"),
-                                                     selected = FALSE)),
+                       # menuItem("Horario pabellones",tabName = "menu2",
+                       #          icon=icon("eye")),
+                       # menuItem("Verificación de horario",tabName="menu3",
+                       #          icon=icon("hospital")),
+                       # menuItem("Estadisticas operaciones",tabName="menu5",
+                       #           icon=icon("notes-medical"),
+                       bs4Dash::menuItem("Reporte quirófanos",tabName="menu5_1",
+                                            icon=icon("check-square")), 
+                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_2",
+                                            icon=icon("chart-line")),
+                       bs4Dash::menuItem("Duración cirugías",tabName="menu5_3",
+                                            icon=icon("chart-line")),
+                       bs4Dash::menuItem("Profesionales",tabName="menu5_4",
+                                                     icon=icon("user-doctor"))),
                        actionButton(
                          "sign_out",
                          "Sign Out",
@@ -69,11 +65,10 @@ ui <- function(id) {
                          class = "pull-right",selected = FALSE)
                                 
                        
-                     )),
+                     ),
     dashboardBody(
       tabItems(
         tabItem(tabName = "menu1",
-                
                 # Boxes need to be put in a row (or column)
                 fluidRow(width=12,
                          bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Horario pabellones", style = 'font-size:30px'),subtitle="Este menú permite agregar, editar y eliminar citas para cirugía", 
@@ -173,7 +168,7 @@ server <- function(id) {
       text = "Este dashboard es solo una version de prueba",
       type = "info",
       position = "top",
-      timer=5000,
+      timer=2000,
       width = "800"
     )
       
