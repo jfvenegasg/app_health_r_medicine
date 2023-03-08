@@ -5,7 +5,8 @@ box::use(
   app/logic/tabla_profesionales,
   app/logic/mapa_de_calor,
   app/logic/calendario_semanal,
-  app/logic/estadísticas,
+  app/logic/utilizacion_de_quirofanos/grafico,
+  app/logic/utilizacion_de_quirofanos/tabla,
   app/logic/tiempo_cirugía,
   app/global)
 
@@ -117,13 +118,17 @@ ui <- function(id) {
         tabItem(tabName = "menu5_1",
                 
                 fluidRow(width=12,
-                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, estadísticas$ui(ns("grafico1")),
+                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, grafico$ui(ns("grafico")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash:: column(width = 3,
-                                valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
-                                valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
-                                valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
-                ))),
+                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
+                         )),
+                         
+                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tabla$ui(ns("tabla")),
+                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                         ),
         
         tabItem(tabName = "menu5_2",
                 
@@ -162,7 +167,11 @@ server <- function(id) {
     tabla_profesionales$server("tabla_prof")
     mapa_de_calor$server("calendarmap")
     calendario_semanal$server("calendario")
-    estadísticas$server("grafico1")
+    
+    # Utilizacion de quirofanos
+    grafico$server("grafico")
+    tabla$server("tabla")
+    
     tiempo_cirugía$server("histograma")
 
     shinyWidgets::show_toast(
