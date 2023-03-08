@@ -30,11 +30,10 @@ server <- function(id) {
                       , as.data.frame = TRUE, header = TRUE) |> 
                   echarts4r::group_by(Tipo.de.hora) |>
                   echarts4r::e_chart(Mes) |>
-                  echarts4r::e_bar(Valor, stack = "Tipo.de.hora") |>
+                  echarts4r::e_bar(Valor) |>
         echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
 
-                
-                  
+
     })
     
    
