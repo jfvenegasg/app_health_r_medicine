@@ -30,9 +30,9 @@ server <- function(id) {
     output$histograma<-
       
       echarts4r$renderEcharts4r({ 
-        xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 2, rowIndex = 1:150, colIndex= 1:2
-                        , as.data.frame = TRUE, header = TRUE) |>
-          echarts4r::group_by(Especialidad==input$selector_1)
+          #echarts4r::group_by(Especialidad) |>
+          tiempo |>
+          subset(tiempo,Especialidad=="Cirugía general") |>
           echarts4r::e_charts() |>
           echarts4r::e_histogram(Minutos) |>
           echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
