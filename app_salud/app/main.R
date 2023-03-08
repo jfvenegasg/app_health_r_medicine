@@ -130,19 +130,19 @@ ui <- function(id) {
                 fluidRow(width=12,
                          box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE),
-                         bs4Dash:: column(width = 3,
+                         bs4Dash::column(width = 3,
                                           valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check")))
                          )),
         
         tabItem(tabName = "menu5_4",
-                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
-                fluidRow(width=12,box(width=6,title="Tabla profesionales",height = "600",tabla_profesionales$ui(ns("tabla_prof"))),
-                         box(width=6,title="Tabla pabellon",height = "600"))
+                fluidRow(width=12,box(width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),bs4Dash::column(width=3,valueBox(width = 12,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+                                                valueBox(width = 12,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")))),
+                fluidRow(width=12,box(width=12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)),
+                fluidRow(width=12,box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+              
         )
         
      
