@@ -9,7 +9,6 @@ box::use(
   app/logic/utilizacion_de_quirofanos/tabla,
   app/logic/tiempo_cirugía,
   app/logic/carga_imagen,
-  app/logic/Tiempo_extra/grafico_tiempoExtra,
   app/global)
 
 
