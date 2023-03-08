@@ -26,7 +26,7 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     output$grafico<- echarts4r$renderEcharts4r({ 
-                  xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 2, rowIndex = 15:59, colIndex= 1:3
+                  xlsx::read.xlsx(file="app/logic/data/set_de_datos.xlsx",sheetIndex = 2, rowIndex = 15:59, colIndex= 1:3
                       , as.data.frame = TRUE, header = TRUE) |> 
                   echarts4r::group_by(Tipo.de.hora) |>
                   echarts4r::e_chart(Mes) |>
