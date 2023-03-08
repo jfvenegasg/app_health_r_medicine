@@ -29,7 +29,8 @@ box::use(
   config,
   polished,
   shinyWidgets,
-  shinycssloaders)
+  shinycssloaders,
+  echarts4r)
 
 
 
@@ -92,33 +93,26 @@ ui <- function(id) {
                 ), 
         
    
-        tabItem(tabName = "menu2",
-                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
-                                  valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
-                                  valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
-                                  valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
-
-                fluidRow(width=12,box(width = 12,title = shiny::h3("Mapa de calor agenda pabellones"),closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
-                                      status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
-            
-                fluidRow(width=12,box(width = 12,title = shiny::h3("Calendario"),closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
-
-                                      status = "info",headerBorder = FALSE,collapsible = FALSE))
-                
-                ),
+        # tabItem(tabName = "menu2",
+        #         fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+        #                           valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
+        #                           valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
+        #                           valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
+        # 
+        #         fluidRow(width=12,box(width = 12,title = shiny::h3("Mapa de calor agenda pabellones"),closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
+        #                               status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
+        #     
+        #         fluidRow(width=12,box(width = 12,title = shiny::h3("Calendario"),closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
+        # 
+        #                               status = "info",headerBorder = FALSE,collapsible = FALSE))
+        #         
+        #         ),
         
-        tabItem(tabName = "menu3",
-                fluidRow(width=12,timeline$ui(ns("linea_de_tiempo"))),
-                fluidRow(width=12,box(width=12,title="Linea de tiempo",height = "300",
-                                      status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))),
-        tabItem(tabName = "menu5_4",
-                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
-                         valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
-                fluidRow(width=12,box(width=6,title="Tabla profesionales",height = "600",tabla_profesionales$ui(ns("tabla_prof"))),
-                                  box(width=6,title="Tabla pabellon",height = "600"))
-                ),
+        # tabItem(tabName = "menu3",
+        #         fluidRow(width=12,timeline$ui(ns("linea_de_tiempo"))),
+        #         fluidRow(width=12,box(width=12,title="Linea de tiempo",height = "300",
+        #                               status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+        #         ),
         
         tabItem(tabName = "menu5_1",
                 
@@ -140,7 +134,15 @@ ui <- function(id) {
                                           valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "info",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "success",icon = icon("check"))
-                         )))
+                         ))),
+        tabItem(tabName = "menu5_4",
+                fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
+                         valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
+                fluidRow(width=12,box(width=6,title="Tabla profesionales",height = "600",tabla_profesionales$ui(ns("tabla_prof"))),
+                         box(width=6,title="Tabla pabellon",height = "600"))
+        )
         
      
      
