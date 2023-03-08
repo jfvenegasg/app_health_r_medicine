@@ -10,7 +10,8 @@ box::use(
   app/logic/tiempo_cirugía,
   app/logic/carga_imagen,
   app/logic/analisis_de_suspensiones/grafico_barra,
-  app/logic/analisis_de_suspensiones/grafico_sankey)
+  app/logic/analisis_de_suspensiones/grafico_sankey,
+  app/logic/Tiempo_extra/grafico_tiempoExtra)
 
 box::use(
   htmltools,
@@ -124,6 +125,12 @@ ui <- function(id) {
                              status = "primary",headerBorder = FALSE,collapsible = FALSE)
                 )),
         
+        tabItem(tabName = "menu5_2",
+                
+                fluidRow(width=12,
+                         box(width = 9,title = "Tiempo total adicional", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra"))))
+        ),
+        
         
         tabItem(tabName = "menu5_3",
                 
@@ -175,6 +182,7 @@ server <- function(id) {
     
     tiempo_cirugía$server("histograma")
     carga_imagen$server("myImage")
+    grafico_tiempoExtra$server("grafico_extra")
     
     shinyWidgets::show_toast(
       title = "Sistema de gestion HBV",

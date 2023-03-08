@@ -16,7 +16,7 @@ ui <- function(id) {
   
   tagList(
     
-    echarts4r$echarts4rOutput(ns("grafico"))
+    echarts4r$echarts4rOutput(ns("grafico_extra"))
     
   )
   
@@ -25,7 +25,7 @@ ui <- function(id) {
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
-    output$grafico<- echarts4r$renderEcharts4r({ 
+    output$grafico_extra<- echarts4r$renderEcharts4r({ 
       xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 152:165, colIndex= 4:5
                       , as.data.frame = TRUE, header = TRUE) |> 
         echarts4r::e_chart(Mes) |>
