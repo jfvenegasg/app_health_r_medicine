@@ -128,7 +128,8 @@ ui <- function(id) {
         tabItem(tabName = "menu5_2",
                 
                 fluidRow(width=12,
-                         box(width = 9,title = "Tiempo total adicional", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra"))))
+                         box(width = 9,title = "Tiempo total adicional", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
+                             status = "primary",headerBorder = FALSE,collapsible = FALSE))
         ),
         
         
