@@ -7,6 +7,7 @@ box::use(
   app/logic/calendario_semanal,
   app/logic/estadísticas,
   app/logic/tiempo_cirugía,
+  app/logic/carga_imagen,
   app/global)
 
 
@@ -53,11 +54,11 @@ ui <- function(id) {
                        #           icon=icon("notes-medical"),
                        bs4Dash::menuItem("Reporte quirófanos",tabName="menu5_1",
                                             icon=icon("check-square")), 
-                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_2",
+                       bs4Dash::menuItem("Análisis tiempo real vs programado",tabName="menu5_2",
                                             icon=icon("chart-line")),
                        bs4Dash::menuItem("Duración cirugías",tabName="menu5_3",
                                             icon=icon("chart-line")),
-                       bs4Dash::menuItem("Profesionales",tabName="menu5_4",
+                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_4",
                                                      icon=icon("user-doctor"))),
                        actionButton(
                          "sign_out",
@@ -70,26 +71,18 @@ ui <- function(id) {
     dashboardBody(
       tabItems(
         tabItem(tabName = "menu1",
+                fluidRow(width=12, carga_imagen$ui(ns("myImage"))),
                 # Boxes need to be put in a row (or column)
                 fluidRow(width=12,
-                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Horario pabellones", style = 'font-size:30px'),subtitle="Este menú permite agregar, editar y eliminar citas para cirugía", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu2",color = "primary",fill=FALSE, iconElevation = 2,elevation = 2),
-                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Verificación de horario", style = 'font-size:30px'),subtitle="Este menú permite ver los horarios disponibles de pabellones y especialidades médicas", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu3",color = "info",fill=FALSE, iconElevation = 2,elevation = 2)),
-                         
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2),
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Análisis tiempo real vs programado", style = 'font-size:30px'),subtitle="Datos acerca de las cirugías que exceden el tiempo programdo", 
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2)),
                 fluidRow(width=12,
-                shiny::h2(class = "divider", shiny::div(class = "content",icon("chart-line"),"Estadísticas operacionales"))
-                ),
-                fluidRow(width=12,
-                         bs4Dash::infoBox(width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "pink",fill=FALSE, iconElevation = 2,elevation = 2),
+                         bs4Dash::infoBox(width = 6,title = shiny::h3("Duración cirugías", style = 'font-size:30px'),subtitle="Datos históricos de la duración de distintos tipos de cirugías", 
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_3",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2),
                          bs4Dash::infoBox(width = 6,title = shiny::h3("Análisis suspenciones", style = 'font-size:30px'),subtitle="Se presentan datos acerca de las causas de suspención de cirugías", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "maroon",fill=FALSE, iconElevation = 2,elevation = 2)),
-                fluidRow(width=12,
-                         bs4Dash::infoBox(width = 6,title = shiny::h3("Duración cirugías", style = 'font-size:30px'),subtitle="Vista de datos históricos de la duración de las distintas cirugías", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_3",color = "danger",fill=FALSE, iconElevation = 2,elevation = 2),
-                         bs4Dash::infoBox(width = 6,title = shiny::h3("Profesionales", style = 'font-size:30px'),subtitle="En este menú se puede ver la disponibilidad de profesionales", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_4",color = "success",fill=FALSE, iconElevation = 2,elevation = 2))
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_4",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2))
                 ), 
         
    
@@ -120,7 +113,7 @@ ui <- function(id) {
                          box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, estadísticas$ui(ns("grafico1")),
                                       status = "primary",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash:: column(width = 3,
-                                valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
+                                valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
                                 valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
                                 valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "purple",icon = icon("check"))
                 ))),
@@ -128,7 +121,7 @@ ui <- function(id) {
         tabItem(tabName = "menu5_3",
                 
                 fluidRow(width=12,
-                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
+                         box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash:: column(width = 3,
                                           valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "primary",icon = icon("check")),
@@ -151,7 +144,8 @@ ui <- function(id) {
     ))
   
  
-  }
+}
+
 polished::secure_ui(ui)
 
 #' @export
@@ -164,6 +158,7 @@ server <- function(id) {
     calendario_semanal$server("calendario")
     estadísticas$server("grafico1")
     tiempo_cirugía$server("histograma")
+    carga_imagen$server("myImage")
 
     shinyWidgets::show_toast(
       title = "Sistema de gestion HBV",
