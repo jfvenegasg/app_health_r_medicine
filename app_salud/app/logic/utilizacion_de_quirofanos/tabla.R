@@ -29,7 +29,7 @@ server <- function(id) {
     
     output$tabla<-reactable$renderReactable({
       
-      xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 2, rowIndex = 1:12, colIndex= 1:11
+      xlsx::read.xlsx(file="app/logic/data/set_de_datos.xlsx",sheetIndex = 2, rowIndex = 1:12, colIndex= 1:11
                       , as.data.frame = TRUE, header = TRUE) |>
         dplyr::mutate_if(is.numeric, ~ dplyr::case_when(. < 2 ~ round(., 2), TRUE ~ ceiling(.))) |> 
         dplyr::mutate_at(7:11, scales::percent) |>
