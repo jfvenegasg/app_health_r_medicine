@@ -27,11 +27,12 @@ ui <- function(id) {
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     output$grafico_horizontal<- echarts4r$renderEcharts4r({ 
-      xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 267:272, colIndex= 4:5
+      xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 267:272, colIndex= 4:6
                       , as.data.frame = TRUE, header = TRUE)|> 
         dplyr::arrange(Tiempo.adicional)|>
         echarts4r::e_chart(Especialidad) |>
         echarts4r::e_bar(Tiempo.adicional, name = "Tiempo adicional promedio") |>
+        echarts4r::e_bar(Tiempo.de.inactividad, name = "Tiempo de inactividad promedio") |>
         echarts4r::e_labels(position = "right") |>
         echarts4r::e_flip_coords() |>
         echarts4r::e_y_axis(splitLine = list(show = FALSE)) |>

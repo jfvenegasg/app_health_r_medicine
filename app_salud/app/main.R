@@ -57,11 +57,11 @@ ui <- function(id) {
                        #           icon=icon("notes-medical"),
                        bs4Dash::menuItem("Reporte quirófanos",tabName="menu5_1",
                                          icon=icon("check-square")), 
-                       bs4Dash::menuItem("Análisis tiempo real vs programado",tabName="menu5_2",
+                       bs4Dash::menuItem("Tiempo real vs programado",tabName="menu5_2",
                                          icon=icon("chart-line")),
-                       bs4Dash::menuItem("Duración cirugías",tabName="menu5_3",
-                                         icon=icon("chart-line")),
-                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_4",
+                       bs4Dash::menuItem("Duración cirugíass",tabName="menu5_3",
+                                         icon=icon("user-doctor")),
+                    bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_4",
                                          icon=icon("user-doctor"))),
                      actionButton(
                        "sign_out",
@@ -189,6 +189,7 @@ server <- function(id) {
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")
+
     
     shinyWidgets::show_toast(
       title = "Sistema de gestion HBV",
