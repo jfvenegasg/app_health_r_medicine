@@ -122,10 +122,10 @@ ui <- function(id) {
         tabItem(tabName = "menu5_2",
                 
                 fluidRow(width=12,
-                         box(width = 9,title = "Tiempo total adicional", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
+                         box(width = 9,title = "Tiempo total adicional y de inactividad", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE)),
                 fluidRow(width=12,
-                         box(width = 9,title = "Tiempo adicional promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
+                         box(width = 9,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE))
         ),
         

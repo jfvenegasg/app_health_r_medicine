@@ -15,7 +15,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
+    echarts4r$selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
     echarts4r$echarts4rOutput(ns("histograma"))
   )
 }
