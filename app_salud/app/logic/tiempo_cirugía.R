@@ -15,7 +15,7 @@ ui <- function(id) {
   ns <- NS(id)
   
   tagList(
-    echarts4r$selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
+    selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
     echarts4r$echarts4rOutput(ns("histograma"))
   )
 }
@@ -30,9 +30,8 @@ server <- function(id) {
     output$histograma<-
       
       echarts4r$renderEcharts4r({ 
-          #echarts4r::group_by(Especialidad) |>
-          tiempo |>
-          subset(tiempo,Especialidad=="Cirugía general") |>
+         
+          subset(tiempo,Especialidad==input$selector_1) |>
           echarts4r::e_charts() |>
           echarts4r::e_histogram(Minutos) |>
           echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))

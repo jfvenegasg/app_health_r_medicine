@@ -112,7 +112,7 @@ server <- function(id) {
         echarts4r::e_charts() |> 
         echarts4r::e_sankey(source, target, value) |> 
         echarts4r::e_title("Sankey chart") |>
-        echarts4r::e_dims(height = "900", width = "auto")
+        echarts4r::e_dims(height = "900px", width = "auto")
       
       
       
