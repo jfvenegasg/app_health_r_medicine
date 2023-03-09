@@ -11,7 +11,8 @@ box::use(
   app/logic/carga_imagen,
   app/logic/analisis_de_suspensiones/grafico_barra,
   app/logic/analisis_de_suspensiones/grafico_sankey,
-  app/logic/Tiempo_extra/grafico_tiempoExtra)
+  app/logic/Tiempo_extra/grafico_tiempoExtra,
+  app/logic/Tiempo_extra/grafico_horizontal)
 
 box::use(
   htmltools,
@@ -121,7 +122,7 @@ ui <- function(id) {
                                           valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "purple",icon = icon("check"))),
                          
                          
-                         box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tabla$ui(ns("tabla")),
+                         box(width = 12,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tabla$ui(ns("tabla")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE)
                 )),
         
@@ -129,6 +130,9 @@ ui <- function(id) {
                 
                 fluidRow(width=12,
                          box(width = 9,title = "Tiempo total adicional", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
+                             status = "primary",headerBorder = FALSE,collapsible = FALSE)),
+                fluidRow(width=12,
+                         box(width = 9,title = "Tiempo adicional promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
                              status = "primary",headerBorder = FALSE,collapsible = FALSE))
         ),
         
@@ -184,6 +188,7 @@ server <- function(id) {
     tiempo_cirugía$server("histograma")
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
+    grafico_horizontal$server("grafico_horizontal")
     
     shinyWidgets::show_toast(
       title = "Sistema de gestion HBV",
