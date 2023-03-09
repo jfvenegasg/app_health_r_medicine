@@ -31,6 +31,7 @@ server <- function(id) {
         echarts4r::e_chart(Mes) |>
         echarts4r::e_bar(Tiempo.adicional, name = "Minutos adicionales") |>
         echarts4r::e_bar(Tiempo.de.inactividad, name = "Minutos de inactividad") |>
+        echarts4r::e_theme("walden") |>
         echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
       
       

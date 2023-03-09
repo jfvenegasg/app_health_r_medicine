@@ -31,6 +31,7 @@ server <- function(id) {
                       , as.data.frame = TRUE, header = TRUE) |> 
         echarts4r::group_by(Causa.de.suspension) |>
         echarts4r::e_chart(Mes) |>
+        echarts4r::e_theme("essos")|> 
         echarts4r::e_bar(Valor,stack="Causa.de.suspension") 
 
         # echarts4r::e_mark_p(type = "line",
