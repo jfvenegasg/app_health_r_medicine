@@ -38,6 +38,7 @@ server <- function(id) {
         echarts4r::e_labels(position = "right") |>
         echarts4r::e_flip_coords() |>
         echarts4r::e_y_axis(splitLine = list(show = FALSE)) |>
+        echarts4r::e_theme("walden")|>
         echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
     
       

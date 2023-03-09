@@ -71,14 +71,14 @@ ui <- function(id) {
                 # Boxes need to be put in a row (or column)
                 fluidRow(width=12,
                          bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2),
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
                          bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Análisis tiempo real vs programado", style = 'font-size:30px'),subtitle="Datos acerca de las cirugías que exceden el tiempo programdo", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2)),
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
                 fluidRow(width=12,
                          bs4Dash::infoBox(width = 6,title = shiny::h3("Duración cirugías", style = 'font-size:30px'),subtitle="Datos históricos de la duración de distintos tipos de cirugías", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_3",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2),
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_3",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
                          bs4Dash::infoBox(width = 6,title = shiny::h3("Análisis suspenciones", style = 'font-size:30px'),subtitle="Se presentan datos acerca de las causas de suspención de cirugías", 
-                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_4",color = "purple",fill=FALSE, iconElevation = 2,elevation = 2))
+                                          icon=shiny::icon("arrow-pointer"), tabName = "menu5_4",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2))
         ), 
         
         
@@ -126,8 +126,8 @@ ui <- function(id) {
                              status = "primary",headerBorder = FALSE,collapsible = FALSE),
                          
                          bs4Dash:: column(width = 3,
-                                          valueBox(width = 12,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "purple",icon = icon("check")))
+                                          valueBox(width = 12,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                          ),
                 fluidRow(width=12,
                          box(width = 9,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
