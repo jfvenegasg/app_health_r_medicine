@@ -1,10 +1,6 @@
 # app/main.R
 
 box::use(
-  app/logic/timeline,
-  app/logic/tabla_profesionales,
-  app/logic/mapa_de_calor,
-  app/logic/calendario_semanal,
   app/logic/utilizacion_de_quirofanos/grafico,
   app/logic/utilizacion_de_quirofanos/tabla,
   app/logic/tiempo_cirugía,
@@ -26,10 +22,7 @@ box::use(
     dashboardHeader, dashboardBody, dashboardSidebar,
     sidebarMenu, menuItem,box,tabItem,tabItems,valueBox],
   utils,
-  calheatmapR,
   dplyr,
-  toastui,
-  highcharter,
   config,
   polished,
   shinyWidgets,
@@ -172,10 +165,10 @@ polished::secure_ui(ui)
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    timeline$server("linea_de_tiempo")
-    tabla_profesionales$server("tabla_prof")
-    mapa_de_calor$server("calendarmap")
-    calendario_semanal$server("calendario")
+    #timeline$server("linea_de_tiempo")
+    #tabla_profesionales$server("tabla_prof")
+    #mapa_de_calor$server("calendarmap")
+    #calendario_semanal$server("calendario")
     
     # Utilizacion de quirofanos
     grafico$server("grafico")
