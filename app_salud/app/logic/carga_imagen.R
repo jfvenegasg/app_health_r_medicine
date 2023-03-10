@@ -28,7 +28,7 @@ server <- function(id) {
       
       list(src = "app/logic/data/imagen_inicio.jpg",
            width = "100%",
-           height = 200)
+           height = 175)
       
     }, deleteFile = F)
 

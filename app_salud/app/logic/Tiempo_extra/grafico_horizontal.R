@@ -40,6 +40,7 @@ server <- function(id) {
         echarts4r::e_y_axis(splitLine = list(show = FALSE)) |>
         echarts4r::e_theme("walden")|>
         echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
+        
     
       
     })

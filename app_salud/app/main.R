@@ -9,7 +9,8 @@ box::use(
   app/logic/analisis_de_suspensiones/grafico_sankey,
   app/logic/Tiempo_extra/grafico_tiempoExtra,
   app/logic/Tiempo_extra/grafico_horizontal,
-  app/logic/Tiempo_extra/grafico_sunburst)
+  app/logic/Tiempo_extra/grafico_circular,
+  app/logic/Tiempo_extra/grafico_circular2)
 
 box::use(
   htmltools,
@@ -153,18 +154,24 @@ ui <- function(id) {
         tabItem(tabName = "menu5_2",
                 
                 fluidRow(width=12,
+                                          valueBox(width = 6,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
+                                          valueBox(width = 6,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "teal",icon = icon("check"))
+                         ),
+                         
+                fluidRow(width=12,
                          box(width = 9,title = "Tiempo total adicional y de inactividad", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          
-                         bs4Dash:: column(width = 3,
-                                          valueBox(width = 12,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "teal",icon = icon("check")))
+                         box(width = 3,title = "% de tiempo adicional por cirugía", closable = FALSE,elevation = 2, grafico_circular$ui(ns("grafico_circular")),
+                                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
                          ),
+                
                 fluidRow(width=12,
-                         box(width = 8,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
+                         box(width = 9,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
-                         box(width = 4,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_sunburst$ui(ns("grafico_sunburst")),
-                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),)
+                         box(width = 3,title = "% de tiempo de inactividad por cirugía", closable = FALSE,elevation = 2, grafico_circular2$ui(ns("grafico_circular2")),
+                             status = "teal",headerBorder = FALSE,collapsible = FALSE)
+                         ),
         ),
         
         
@@ -174,8 +181,8 @@ ui <- function(id) {
                          box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash::column(width = 3,
-                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3("160", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                         valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22", style = 'font-size:27px'),color = "teal",icon = icon("check")))
+                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3("160 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                         valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                 )),
         
         tabItem(tabName = "menu5_4",
@@ -224,7 +231,8 @@ server <- function(id) {
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")
-    grafico_sunburst$server("grafico_sunburst")
+    grafico_circular$server("grafico_circular")
+    grafico_circular2$server("grafico_circular2")
 
     
     shinyWidgets::show_toast(
