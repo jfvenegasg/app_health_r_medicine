@@ -36,7 +36,6 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   dashboardPage(
-    skin = "blue",
     dashboardHeader(title = "Sistema de gestion HBV",rightUi = dropdownMenu(
       badgeStatus = "danger",
       type = "messages",
@@ -68,7 +67,7 @@ ui <- function(id) {
           value = 10
         )
       ))),
-    dashboardSidebar(side = "top", visible = FALSE,
+    dashboardSidebar(side = "top", visible = FALSE, status = "teal",
                      sidebarMenu(
                        id = "sidebar",
                        menuItem("Inicio",tabName = "menu1",
