@@ -33,8 +33,8 @@ server <- function(id) {
         #dplyr::arrange(input$selector_2)|>
         dplyr::arrange(Tiempo.adicional)|>
         echarts4r::e_chart(Especialidad) |>
-        echarts4r::e_bar(Tiempo.adicional, name = "Tiempo adicional promedio") |>
-        echarts4r::e_bar(Tiempo.de.inactividad, name = "Tiempo de inactividad promedio") |>
+        echarts4r::e_bar(Tiempo.adicional, name = "Minutos adicionales promedio") |>
+        echarts4r::e_bar(Tiempo.de.inactividad, name = "Minutos de inactividad promedio") |>
         echarts4r::e_labels(position = "right") |>
         echarts4r::e_flip_coords() |>
         echarts4r::e_y_axis(splitLine = list(show = FALSE)) |>

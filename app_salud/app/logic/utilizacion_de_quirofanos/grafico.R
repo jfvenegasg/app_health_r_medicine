@@ -34,7 +34,8 @@ server <- function(id) {
         echarts4r::e_mark_p(type = "line",
                  data = list(yAxis = 0.6), 
                  title = "Line at 50") |>
-        echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
+        echarts4r::e_theme("walden")|> 
+        echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"), formatter = "{d}%")
 
 
     })

@@ -34,6 +34,7 @@ server <- function(id) {
           subset(tiempo,Especialidad==input$selector_1) |>
           echarts4r::e_charts() |>
           echarts4r::e_histogram(Minutos) |>
+          echarts4r::e_theme("walden")|>
           echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
     })
       

@@ -8,7 +8,8 @@ box::use(
   app/logic/analisis_de_suspensiones/grafico_barra,
   app/logic/analisis_de_suspensiones/grafico_sankey,
   app/logic/Tiempo_extra/grafico_tiempoExtra,
-  app/logic/Tiempo_extra/grafico_horizontal)
+  app/logic/Tiempo_extra/grafico_horizontal,
+  app/logic/Tiempo_extra/grafico_sunburst)
 
 box::use(
   htmltools,
@@ -35,6 +36,7 @@ box::use(
 ui <- function(id) {
   ns <- NS(id)
   dashboardPage(
+    skin = "blue",
     dashboardHeader(title = "Sistema de gestion HBV"),
     dashboardSidebar(side = "top", visible = FALSE,
                      sidebarMenu(
@@ -70,9 +72,9 @@ ui <- function(id) {
                 fluidRow(width=12, carga_imagen$ui(ns("myImage"))),
                 # Boxes need to be put in a row (or column)
                 fluidRow(width=12,
-                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "lightblue"),width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
                                           icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
-                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "primary"),width = 6,title = shiny::h3("Análisis tiempo real vs programado", style = 'font-size:30px'),subtitle="Datos acerca de las cirugías que exceden el tiempo programdo", 
+                         bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "lightblue"),width = 6,title = shiny::h3("Análisis tiempo real vs programado", style = 'font-size:30px'),subtitle="Datos acerca de las cirugías que exceden el tiempo programdo", 
                                           icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
                 fluidRow(width=12,
                          bs4Dash::infoBox(width = 6,title = shiny::h3("Duración cirugías", style = 'font-size:30px'),subtitle="Datos históricos de la duración de distintos tipos de cirugías", 
@@ -83,13 +85,13 @@ ui <- function(id) {
         
         
         # tabItem(tabName = "menu2",
-        #         fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
+        #         fluidRow(width=12,valueBox(width = 3,value=h2(5),color = "lightblue",subtitle="Pabellones disponibles",icon = icon("check")),
         #                           valueBox(width = 3,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")),
         #                           valueBox(width = 3,value=h2(30),color = "success",subtitle="dias disponibles",icon = icon("check")),
         #                           valueBox(width = 3,value=h2(335),color = "warning",subtitle="dias no disponibles",icon = icon("check"))),
         # 
         #         fluidRow(width=12,box(width = 12,title = shiny::h3("Mapa de calor agenda pabellones"),closable = FALSE,elevation = 2, mapa_de_calor$ui(ns("calendarmap")),
-        #                               status = "primary",headerBorder = FALSE,collapsible = FALSE,height = "300")),
+        #                               status = "lightblue",headerBorder = FALSE,collapsible = FALSE,height = "300")),
         #     
         #         fluidRow(width=12,box(width = 12,title = shiny::h3("Calendario"),closable = FALSE,elevation = 2, calendario_semanal$ui(ns("calendario")),
         # 
@@ -100,38 +102,40 @@ ui <- function(id) {
         # tabItem(tabName = "menu3",
         #         fluidRow(width=12,timeline$ui(ns("linea_de_tiempo"))),
         #         fluidRow(width=12,box(width=12,title="Linea de tiempo",height = "300",
-        #                               status = "primary",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+        #                               status = "lightblue",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
         #         ),
         
         tabItem(tabName = "menu5_1",
                 
                 fluidRow(width=12,
                          box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, grafico$ui(ns("grafico")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          
                          bs4Dash:: column(width = 3,
-                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "purple",icon = icon("check")),
-                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "purple",icon = icon("check"))),
+                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "teal",icon = icon("check"))),
                          
                          
                          box(width = 12,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, tabla$ui(ns("tabla")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE)
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
                 )),
         
         tabItem(tabName = "menu5_2",
                 
                 fluidRow(width=12,
                          box(width = 9,title = "Tiempo total adicional y de inactividad", closable = FALSE,elevation = 2, grafico_tiempoExtra$ui(ns("grafico_extra")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          
                          bs4Dash:: column(width = 3,
                                           valueBox(width = 12,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                          ),
                 fluidRow(width=12,
-                         box(width = 9,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE))
+                         box(width = 8,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_horizontal$ui(ns("grafico_horizontal")),
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
+                         box(width = 4,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, grafico_sunburst$ui(ns("grafico_sunburst")),
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),)
         ),
         
         
@@ -139,17 +143,22 @@ ui <- function(id) {
                 
                 fluidRow(width=12,
                          box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
-                             status = "primary",headerBorder = FALSE,collapsible = FALSE),
+                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash::column(width = 3,
-                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3("160", style = 'font-size:27px'),color = "purple",icon = icon("check")),
-                                         valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22", style = 'font-size:27px'),color = "purple",icon = icon("check")))
+                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3("160", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                         valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                 )),
         
         tabItem(tabName = "menu5_4",
-                fluidRow(width=12,box(grafico_barra$ui(ns("grafico_barra")),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),bs4Dash::column(width=3,valueBox(width = 12,value=h2(5),color = "primary",subtitle="Pabellones disponibles",icon = icon("check")),
-                                                                                                                                                                             valueBox(width = 12,value=h2(7),color = "secondary",subtitle="Especialidades disponibles",icon = icon("check")))),
-                fluidRow(width=12,box(grafico_sankey$ui(ns("grafico_sankey")),width=12,height="900px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2)),
-                fluidRow(width=12,box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                fluidRow(width=12,
+                         box(grafico_barra$ui(ns("grafico_barra")),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
+                         bs4Dash::column(width=3,
+                                         valueBox(width = 12,value=h2(5),color = "teal",subtitle="Pabellones disponibles",
+                                                  icon = icon("check")),valueBox(width = 12,value=h2(7),color = "teal",subtitle="Especialidades disponibles",icon = icon("check")))),
+                fluidRow(width=12,
+                         box(grafico_sankey$ui(ns("grafico_sankey")),width=12,height="900px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
+                fluidRow(width=12,
+                         box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
                          box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
                 
         )
@@ -186,6 +195,7 @@ server <- function(id) {
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")
+    grafico_sunburst$server("grafico_sunburst")
 
     
     shinyWidgets::show_toast(
