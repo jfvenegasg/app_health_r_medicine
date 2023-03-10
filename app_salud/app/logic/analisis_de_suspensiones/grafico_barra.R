@@ -32,7 +32,8 @@ server <- function(id) {
         echarts4r::group_by(Causa.de.suspension) |>
         echarts4r::e_chart(Mes) |>
         echarts4r::e_theme("walden")|> 
-        echarts4r::e_bar(Valor,stack="Causa.de.suspension") 
+        echarts4r::e_bar(Valor,stack="Causa.de.suspension") |>
+        echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 
         # echarts4r::e_mark_p(type = "line",
         #                     data = list(yAxis = 0.6), 
