@@ -16,12 +16,12 @@ box::use(
   bs4Dash,
   timevis,
   reactable,
-  shiny[moduleServer, NS, fluidRow, icon, h1,h2,tags,observeEvent,renderPrint,actionButton],
+  shiny[moduleServer, NS, fluidRow, icon, h1,h2,tags,observeEvent,renderPrint,actionButton,tagList,img],
   shiny,
   bs4Dash[
     dashboardPage,
     dashboardHeader, dashboardBody, dashboardSidebar,
-    sidebarMenu, menuItem,box,tabItem,tabItems,valueBox],
+    sidebarMenu, menuItem,box,tabItem,tabItems,valueBox,dropdownMenu,messageItem,notificationItem,taskItem],
   utils,
   dplyr,
   config,
@@ -37,7 +37,37 @@ ui <- function(id) {
   ns <- NS(id)
   dashboardPage(
     skin = "blue",
-    dashboardHeader(title = "Sistema de gestion HBV"),
+    dashboardHeader(title = "Sistema de gestion HBV",rightUi = dropdownMenu(
+      badgeStatus = "danger",
+      type = "messages",
+      messageItem(
+        inputId = "triggerAction1",
+        message = "Mensaje 1",
+        from = "Juan Venegas",
+        image = "https://adminlte.io/themes/v3/dist/img/user3-128x128.jpg",
+        time = "Hoy",
+        color = "lime"
+      )
+    ),leftUi = tagList(
+      dropdownMenu(
+        badgeStatus = "info",
+        type = "notifications",
+        notificationItem(
+          inputId = "triggerAction2",
+          text = "Error!",
+          status = "danger"
+        )
+      ),
+      dropdownMenu(
+        badgeStatus = "info",
+        type = "tasks",
+        taskItem(
+          inputId = "triggerAction3",
+          text = "My progreso",
+          color = "orange",
+          value = 10
+        )
+      ))),
     dashboardSidebar(side = "top", visible = FALSE,
                      sidebarMenu(
                        id = "sidebar",
@@ -206,6 +236,8 @@ server <- function(id) {
       timer=2000,
       width = "800"
     )
+    
+ 
     
   })
   
