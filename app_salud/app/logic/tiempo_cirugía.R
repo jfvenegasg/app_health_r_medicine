@@ -24,7 +24,7 @@ ui_1 <- function(id) {
     tagList(
     selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
     echarts4r$echarts4rOutput(ns("histograma")))
-    
+
     
     
 }
@@ -51,7 +51,7 @@ server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     output$media<- shiny$renderText({ 
-      media<-subset(tiempo_cirugía,Especialidad=="Neurocirugía") |>
+      media<-subset(tiempo_cirugía,Especialidad==input$selector_1) |>
         dplyr::summarise(mean = mean(Minutos))
       media[1,1]
     })
