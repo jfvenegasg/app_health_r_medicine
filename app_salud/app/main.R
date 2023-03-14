@@ -1,6 +1,7 @@
 # app/main.R
 
 box::use(
+  app/global,
   app/logic/utilizacion_de_quirofanos/grafico,
   app/logic/utilizacion_de_quirofanos/tabla,
   app/logic/tiempo_cirugía,
@@ -29,7 +30,10 @@ box::use(
   polished,
   shinyWidgets,
   shinycssloaders,
-  echarts4r)
+  echarts4r,
+  pool,
+  DBI,
+  RPostgres)
 
 
 

@@ -1,12 +1,14 @@
 # app/global.R
 
 box::use(
- polished,config
-)
-app_config <- config::get()
+  pool,
+  DBI,
+  RPostgres)
 
-# configure polished
-polished::polished_config(
-  app_name = "clase_3",
-  api_key = "Cz2Jf4Bx67D7s9GjvBlAOPD71DdjBd0agK"
-)
+db_password <- Sys.getenv("DATABASE_PASS")
+pool <- pool::dbPool(drv=RPostgres::Postgres(),
+                     host   = "db-postgresql-nyc1-40399-do-user-13749128-0.b.db.ondigitalocean.com",
+                     dbname = "defaultdb",
+                     user      = "doadmin",
+                     password  = db_password,
+                     port     = 25060)
