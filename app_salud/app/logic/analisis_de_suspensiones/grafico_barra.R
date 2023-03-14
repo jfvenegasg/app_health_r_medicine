@@ -11,10 +11,10 @@ box::use(
   DBI
 )
 
-box::use(
-  app/global)
+#box::use(
+#  app/global)
 
-pool<-global$pool
+#pool<-global$pool
 
 
 #' @export

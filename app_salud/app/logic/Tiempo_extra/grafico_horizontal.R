@@ -21,14 +21,24 @@ ui <- function(id) {
   )
   
 }
-datos<-xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 267:272, colIndex= 4:6
-                , as.data.frame = TRUE, header = TRUE)
+#datos<-xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 267:272, colIndex= 4:6
+#                , as.data.frame = TRUE, header = TRUE)
+
+#DBI::dbCreateTable(pool, name = "datos_tiempo_pomedio_extra", fields = head(datos))
+#DBI::dbListTables(pool)
+#DBI::dbRemoveTable(pool,"datos_tiempo_pomedio_extra" )
+#DBI::dbReadTable(pool, "datos_tiempo_pomedio_extra")
+#DBI::dbAppendTable(conn = pool,name ="datos_tiempo_pomedio_extra" ,value =datos )
+
+#datos<-dplyr::tbl(pool,"datos_tiempo_pomedio_extra")
+
+#xlsx::write.xlsx(x = datos,file = "app/logic/data/datos_tiempo_pomedio_extra_bd.xlsx",row.names = FALSE)
 
 #' @export
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     output$grafico_horizontal<- echarts4r$renderEcharts4r({ 
-      xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 7, rowIndex = 267:272, colIndex= 4:6
+      xlsx::read.xlsx(file="app/logic/data/datos_tiempo_pomedio_extra_bd.xlsx",sheetIndex = 1, rowIndex = 1:6, colIndex= 1:3
                       , as.data.frame = TRUE, header = TRUE)|> 
         #dplyr::arrange(input$selector_2)|>
         dplyr::arrange(Tiempo.adicional)|>

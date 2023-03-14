@@ -13,13 +13,14 @@ con <- DBI::dbConnect(RPostgres::Postgres(),
                       port     = 25060)
 
 
-DBI::dbCreateTable(con, name = "my_data", fields = head(df, 0))
+datos<-data.frame(nombre = "Anastasia",apellido="Rebolledo",dirección="Los castanos 321",edad=24)
+DBI::dbCreateTable(con, name = "datos_personales", fields = head(datos, 0))
 
 #Listar bases de datos en la conexion con
 DBI::dbListTables(con)
 
 #Leer tabla "datos_suspensiones"
-DBI::dbReadTable(con, "datos_suspensiones")
+DBI::dbReadTable(pool, "datos_tiempo_cirugía")
 
 #Leer tabla "datos_suspensiones"
 DBI::dbReadTable(con, "sankey_datos_suspensiones")
@@ -30,10 +31,10 @@ DBI::dbListFields(conn = con,name = "datos_suspensiones")
 DBI::dbCreateTable(con, name = "datos_suspensiones", fields = head(datos_suspensiones, 0))
 
 # Para insertar valores en una tabla
-DBI::dbAppendTable(conn = con,name ="datos_suspensiones" ,value =data_insert )
+DBI::dbAppendTable(conn = pool,name ="datos_tiempo_cirugía" ,value =tiempo )
 
 #Filtrar consultas con dplyr
-consulta<-tbl(con,sql("SELECT * FROM datos_suspensiones")) %>% filter(Causa.de.suspension=="INFRAESTRUCTURA") %>% collect()
+consulta<-tbl(con,sql("SELECT nombre FROM datos_personales")) %>% filter(nombre=="Anastasia") %>% collect()
 
 
 DBI::dbDisconnect(conn = pool)

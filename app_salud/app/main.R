@@ -18,7 +18,7 @@ box::use(
   bs4Dash,
   timevis,
   reactable,
-  shiny[moduleServer, NS, fluidRow, icon, h1,h2,tags,observeEvent,renderPrint,actionButton,tagList,img],
+  shiny[moduleServer, NS, fluidRow, icon, h1,h2,tags,observeEvent,renderPrint,actionButton,tagList,img,renderText, textOutput],
   shiny,
   bs4Dash[
     dashboardPage,
@@ -185,7 +185,7 @@ ui <- function(id) {
                          box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash::column(width = 3,
-                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3("160 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3(tiempo_cirugía$ui(ns("media")), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                                          valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                 )),
         
@@ -232,6 +232,7 @@ server <- function(id) {
     grafico_sankey$server("grafico_sankey")
     
     tiempo_cirugía$server("histograma")
+    tiempo_cirugía$server_2("media")
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")
