@@ -18,15 +18,22 @@ box::use(
 
 
 #' @export
-ui <- function(id) {
+ui_1 <- function(id) {
   ns <- NS(id)
   
-  tagList(
+    tagList(
     selectInput(ns("selector_1"),"Seleccion de especialidad",choices = c("Cirugía general"="Cirugía general","Neurocirugía"="Neurocirugía","Cirugía cardiovascular"="Cirugía cardiovascular")),
     echarts4r$echarts4rOutput(ns("histograma")))
+    
+    
+    
+}
+
+#' @export
+ui_2 <- function(id) {
+  ns <- NS(id)
   
   tagList(shiny$textOutput(ns("media")))
-    
 }
 
 #tiempo<-xlsx::read.xlsx(file="app/logic/data/set_de_datos_1.xlsx",sheetIndex = 2, rowIndex = 1:150, colIndex= 1:2
@@ -43,9 +50,13 @@ tiempo_cirugía<-xlsx::read.xlsx(file="app/logic/data/datos_tiempo_cirugía_bd.x
 server <- function(id) {
   moduleServer(id, function(input, output, session) {
     
-    output$histograma<-
-      
-      echarts4r$renderEcharts4r({ 
+    output$media<- shiny$renderText({ 
+      media<-subset(tiempo_cirugía,Especialidad=="Neurocirugía") |>
+        dplyr::summarise(mean = mean(Minutos))
+      media[1,1]
+    })
+    
+    output$histograma<-echarts4r$renderEcharts4r({ 
          
           subset(tiempo_cirugía,Especialidad==input$selector_1) |>
           echarts4r::e_charts() |>
@@ -53,20 +64,8 @@ server <- function(id) {
           echarts4r::e_theme("walden")|>
           echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
     })
-  })
-}
-
-#' @export  
-server_2 <- function(id) {
-      moduleServer(id, function(input, output, session) {
-    output$media<- 
-      shiny$renderText({ 
-        media<-subset(tiempo_cirugía,Especialidad=="Neurocirugía") |>
-          dplyr::summarise(mean = mean(Minutos))
-       media[1,1]
-      })
+    
    
-    
-    
-  })
-}
+  }) 
+  }
+

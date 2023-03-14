@@ -182,10 +182,10 @@ ui <- function(id) {
         tabItem(tabName = "menu5_3",
                 
                 fluidRow(width=12,
-                         box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui(ns("histograma")),
+                         box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, tiempo_cirugía$ui_1(ns("histograma")),
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                          bs4Dash::column(width = 3,
-                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3(tiempo_cirugía$ui(ns("media")), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3(tiempo_cirugía$ui_2(ns("media")), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                                          valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")))
                 )),
         
@@ -232,7 +232,7 @@ server <- function(id) {
     grafico_sankey$server("grafico_sankey")
     
     tiempo_cirugía$server("histograma")
-    tiempo_cirugía$server_2("media")
+    tiempo_cirugía$server("media")
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")
