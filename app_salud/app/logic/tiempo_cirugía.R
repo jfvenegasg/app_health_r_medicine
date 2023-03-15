@@ -52,7 +52,7 @@ server_1 <- function(id) {
     
     output$media<- shiny$renderText({ 
       tiempo_cirugía |>
-        shiny::observeEvent(input$selector_1, {dplyr::filter(tiempo_cirugía,{{Especialidad==input$selector_1}})}) |>
+        shiny::observeEvent(input$selector_1, {dplyr::filter(tiempo_cirugía,{{Especialidad}}==input$selector_1)}) |>
         dplyr::pull(Minutos)|>
         mean()
       
