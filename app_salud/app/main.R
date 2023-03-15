@@ -231,8 +231,8 @@ server <- function(id) {
     grafico_barra$server("grafico_barra")
     grafico_sankey$server("grafico_sankey")
     
-    tiempo_cirugía$server("histograma")
-    tiempo_cirugía$server("media")
+    tiempo_cirugía$server_2("histograma")
+    tiempo_cirugía$server_1("media")
     carga_imagen$server("myImage")
     grafico_tiempoExtra$server("grafico_extra")
     grafico_horizontal$server("grafico_horizontal")

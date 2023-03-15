@@ -9,6 +9,11 @@ box::use(
   echarts4r
 )
 
+#box::use(
+#  app/global)
+
+#pool<-global$pool
+
 
 #' @export
 ui <- function(id) {

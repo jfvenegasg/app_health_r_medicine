@@ -3,7 +3,7 @@
 box::use(
   reactable,
   MASS,
-  shiny[h3, moduleServer, NS, tagList,selectInput,reactive,observe,HTML,p,renderText, textOutput],
+  shiny[h3, moduleServer, NS, tagList,selectInput,reactive,observe,HTML,p,renderText, textOutput, observeEvent],
   shiny,
   dplyr,
   utils,
@@ -47,14 +47,21 @@ tiempo_cirugía<-xlsx::read.xlsx(file="app/logic/data/datos_tiempo_cirugía_bd.x
                               , as.data.frame = TRUE, header = TRUE)
 
 #' @export
-server <- function(id) {
+server_1 <- function(id) {
   moduleServer(id, function(input, output, session) {
     
     output$media<- shiny$renderText({ 
-      media<-subset(tiempo_cirugía,Especialidad==input$selector_1) |>
-        dplyr::summarise(mean = mean(Minutos))
-      media[1,1]
+      tiempo_cirugía |>
+        shiny::observeEvent(input$selector_1, {dplyr::filter(tiempo_cirugía,{{Especialidad==input$selector_1}})}) |>
+        dplyr::pull(Minutos)|>
+        mean()
+      
     })
+  })}
+    
+#' @export
+server_2 <- function(id) {
+  moduleServer(id, function(input, output, session) {
     
     output$histograma<-echarts4r$renderEcharts4r({ 
          
@@ -64,8 +71,7 @@ server <- function(id) {
           echarts4r::e_theme("walden")|>
           echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
     })
-    
+  })}    
    
-  }) 
-  }
+  
 
