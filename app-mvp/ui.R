@@ -8,30 +8,20 @@
 #
 
 library(shiny)
-#library(rhino)
 library(htmlwidgets)
-library(semantic.dashboard)
-#library(leaflet)
 library(dplyr)
 library(openxlsx)
 library(echarts4r)
 library(utils)
-#library(highcharter)
-#library(shiny.i18n)
-library(shiny)
 library(bs4Dash)
-#library(timevis)
 library(reactable)
 library(MASS)
-#library(calheatmapR)
-#library(polished)
 library(config)
 library(htmltools)
 library(lubridate)
 library(shinyWidgets)
 library(shinycssloaders)
 library(DBI)
-library(pool)
 
 ui <-  dashboardPage(
     dashboardHeader(title = "Sistema de gestion HBV",rightUi = dropdownMenu(
