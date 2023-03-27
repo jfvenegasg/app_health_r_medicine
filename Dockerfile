@@ -25,6 +25,7 @@ RUN R -q -e 'install.packages(c(\
               "htmlwidgets", \
               "dplyr", \
               "openxlsx", \
+              "xlsx", \
               "echarts4r", \
               "utils", \
               "bs4Dash", \
@@ -36,7 +37,6 @@ RUN R -q -e 'install.packages(c(\
               "shinyWidgets", \
               "shinycssloaders", \
               "DBI" \
-              
             ), \
             repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-01-13"\
           )'
