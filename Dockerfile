@@ -25,7 +25,6 @@ RUN R -q -e 'install.packages(c(\
               "htmlwidgets", \
               "dplyr", \
               "openxlsx", \
-              "xlsx", \
               "echarts4r", \
               "utils", \
               "bs4Dash", \
