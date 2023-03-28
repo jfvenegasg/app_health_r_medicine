@@ -62,13 +62,9 @@ ui <-  dashboardPage(
                                 icon=icon("laptop-medical"),
                                 selected = TRUE),
                        
-                       bs4Dash::menuItem("Reporte quirófanos",tabName="menu5_1",
-                                         icon=icon("check-square")), 
-                       bs4Dash::menuItem("Tiempo real vs programado",tabName="menu5_2",
-                                         icon=icon("chart-line")),
-                       bs4Dash::menuItem("Duración cirugías",tabName="menu5_3",
-                                         icon=icon("user-doctor")),
-                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu5_4",
+                       bs4Dash::menuItem("Reporte quirófanos",tabName="menu2",
+                                         icon=icon("check-square")),
+                       bs4Dash::menuItem("Análisis suspenciones",tabName="menu3",
                                          icon=icon("user-doctor"))),
                      actionButton(
                        "sign_out",
@@ -98,7 +94,7 @@ ui <-  dashboardPage(
         
      
         
-        tabItem(tabName = "menu5_1",
+        tabItem(tabName = "menu2",
                 
                 fluidRow(width=12,
                          box(width = 9,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, echarts4rOutput("grafico"),
@@ -114,41 +110,7 @@ ui <-  dashboardPage(
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
                 )),
         
-        tabItem(tabName = "menu5_2",
-                
-                fluidRow(width=12,
-                         valueBox(width = 6,subtitle = "Total horas adicionales último año",value = shiny::h3("2553", style = 'font-size:27px'),color = "lightblue",icon = icon("check")),
-                         valueBox(width = 6,subtitle = "Total horas de inactividad último año",value = shiny::h3("2817", style = 'font-size:27px'),color = "teal",icon = icon("check"))
-                ),
-                
-                fluidRow(width=12,
-                         box(width = 9,title = "Tiempo total adicional y de inactividad", closable = FALSE,elevation = 2, echarts4rOutput("grafico_extra"),
-                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
-                         
-                         box(width = 3,title = "% de tiempo adicional por cirugía", closable = FALSE,elevation = 2, echarts4rOutput("grafico_circular"),
-                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
-                ),
-                
-                fluidRow(width=12,
-                         box(width = 9,title = "Tiempo adicional y tiempo de inactividad promedio por cirugía", closable = FALSE,elevation = 2, echarts4rOutput("grafico_horizontal"),
-                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
-                         box(width = 3,title = "% de tiempo de inactividad por cirugía", closable = FALSE,elevation = 2, echarts4rOutput("grafico_circular2"),
-                             status = "teal",headerBorder = FALSE,collapsible = FALSE)
-                ),
-        ),
-        
-        
-        tabItem(tabName = "menu5_3",
-                
-                fluidRow(width=12,
-                         box(width = 9,title = "Tiempos históricos de cirugía",closable = FALSE,elevation = 2, echarts4rOutput("histograma"),
-                             status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
-                         bs4Dash::column(width = 3,
-                                         valueBox(width = 12,subtitle = "Media",value = shiny::h3(textOutput("media"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                         valueBox(width = 12,subtitle = "Desviación estándar",value = shiny::h3("22 Minutos", style = 'font-size:27px'),color = "teal",icon = icon("check")))
-                )),
-        
-        tabItem(tabName = "menu5_4",
+        tabItem(tabName = "menu3",
                 fluidRow(width=12,
                          box(echarts4rOutput("grafico_barra"),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
                          bs4Dash::column(width=3,
