@@ -38,17 +38,7 @@ function(input, output, session) {
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"), formatter = "{d}%")
   })
   
-  #tabla utilización de quirofanos
-  output$tabla<-renderReactable({
-    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 1:12,cols = 1:12 ) |> 
-    # xlsx::read.xlsx(file="modulos/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 1:12, colIndex= 1:12
-    #                 , as.data.frame = TRUE, header = TRUE) |>
-    #   dplyr::mutate_if(is.numeric, ~ dplyr::case_when(. < 2 ~ round(., 2), TRUE ~ ceiling(.))) |> 
-      dplyr::mutate_at(8:12, scales::percent) |>
-      reactable::reactable(searchable = TRUE, minRows = 10) 
-    
-  })
-  
+
   
   #### Analisis de suspensiones ####
   
@@ -81,7 +71,44 @@ function(input, output, session) {
       echarts4r::e_tooltip() 
   })
   
+  output$grafico_pareto_1<- renderEcharts4r({ 
+    
+    suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
+    
+    suspensiones<-suspensiones |> mutate(Valor_anual = Valor/12)
+    
+    suspensiones_15<-aggregate(Valor_anual ~ Causa.de.suspension + Descripcion,subset(suspensiones,Descripcion=="% de total 15 Años Y Más junto con Causas De Suspensión Atribuibles A:"), sum)
+    
+    suspensiones_15<-suspensiones_15 |>  arrange(desc(Valor_anual))
+    
+    suspensiones_15 |>
+      mutate(acumulado = cumsum(Valor_anual)) |>
+      e_charts(Causa.de.suspension) |>
+      e_bar(Valor_anual) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  
+    
+  })
   
+  output$grafico_pareto_2<- renderEcharts4r({ 
+    
+    suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
+    
+    suspensiones<-suspensiones |> mutate(Valor_anual = Valor/12)
+    
+    suspensiones_total<-aggregate(Valor_anual ~ Causa.de.suspension + Descripcion,subset(suspensiones,Descripcion=="% de total Suspensiones totales junto con Causas De Suspensión Atribuibles A:"), sum)
+    
+    suspensiones_total<-suspensiones_total |>  arrange(desc(Valor_anual))
+    
+    suspensiones_total |>
+      mutate(acumulado = cumsum(Valor_anual)) |>
+      e_charts(Causa.de.suspension) |>
+      e_bar(Valor_anual) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  
+    
+    
+  })
   
   shinyWidgets::show_toast(
     title = "Sistema de gestion HBV",
