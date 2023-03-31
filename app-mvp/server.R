@@ -50,7 +50,7 @@ function(input, output, session) {
   })
   
   
-  #### Analisis de suspensiones ####
+  #### Analisis de suspensiones por causa####
   
   # Tiempo total adicional y de inactividad
   output$grafico_barra<- renderEcharts4r({ 
@@ -93,3 +93,28 @@ function(input, output, session) {
   )
 
 }
+
+  #### Análisis de suspensiones por especialidad ####
+
+output$grafico_susp_esp<- renderEcharts4r({ 
+susp_esp <-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:78,cols = 9:11 ))
+susp_esp[1,1] <- ""
+   # create a tree object
+   universe <- data.tree::FromDataFrameNetwork(susp_esp)
+   
+     # use it in echarts4r
+    universe |> 
+         echarts4r::e_charts() |> 
+         echarts4r::e_sunburst()
+    })
+
+output$grafico_susp_esp2<- renderEcharts4r({ 
+susp_esp2<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
+    data.frame(susp_esp2) |>
+      echarts4r::group_by(Tipo) |>
+      echarts4r::e_chart(Especialidad) |>
+      echarts4r::e_theme("walden")|> 
+      echarts4r::e_bar(cantidad,stack="Tipo") |>
+      echarts4r::e_flip_coords() |>
+      echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"),formatter = echarts4r::e_tooltip_item_formatter("percent"))
+})
