@@ -16,14 +16,28 @@ mutate(acumulado = cumsum(Valor_anual)) |>
 e_charts(Causa.de.suspension) |>
 e_bar(Valor_anual) |>
 e_line(acumulado, y_index = 1) |>
-e_tooltip(trigger = "axis")  
+e_tooltip(trigger = "axis")  |>
+  e_axis_labels(y = "Valor", x = "Suspensiones") |>
+  e_title("Grafico de Pareto del % de total 15 Años Y Más") |>
+  e_mark_line(data = list(yAxis = 0.80),
+              y_index = 1, 
+              symbol = "none", 
+              lineStyle = list(type = 'solid'), 
+              title = "80% threshold")
 
 suspensiones_total |>
   mutate(acumulado = cumsum(Valor_anual)) |>
   e_charts(Causa.de.suspension) |>
   e_bar(Valor_anual) |>
   e_line(acumulado, y_index = 1) |>
-  e_tooltip(trigger = "axis")  
+  e_tooltip(trigger = "axis")  |>
+  e_axis_labels(y = "Valor", x = "Suspensiones") |>
+  e_title("Grafico de Pareto del % de total Suspensiones totales") |>
+  e_mark_line(data = list(yAxis = 0.80),
+              y_index = 1, 
+              symbol = "none", 
+              lineStyle = list(type = 'solid'), 
+              title = "80% threshold")
 
 
 

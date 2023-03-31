@@ -66,10 +66,12 @@ function(input, output, session) {
       echarts4r::e_charts() |> 
       echarts4r::e_sankey(source, target, value,layoutIterations = 6) |> 
       echarts4r::e_title("Sankey chart") |>
-      echarts4r::e_dims(height = "900px", width = "auto") |>
+      echarts4r::e_dims(height = "600px", width = "auto") |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_tooltip() 
   })
+  
+  # Grafico de pareto % de total 15 Años Y Más junto con Causas De Suspensión
   
   output$grafico_pareto_1<- renderEcharts4r({ 
     
@@ -86,9 +88,20 @@ function(input, output, session) {
       e_charts(Causa.de.suspension) |>
       e_bar(Valor_anual) |>
       e_line(acumulado, y_index = 1) |>
-      e_tooltip(trigger = "axis")  
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Suspensiones") |>
+      e_title("Grafico de Pareto del % de total 15 Años Y Más") |>
+      e_theme("walden")|>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "Umbral al 80% ")
+    
     
   })
+  
+  # Grafico de pareto % de total Suspensiones totales junto con Causas De Suspensión
   
   output$grafico_pareto_2<- renderEcharts4r({ 
     
@@ -105,11 +118,37 @@ function(input, output, session) {
       e_charts(Causa.de.suspension) |>
       e_bar(Valor_anual) |>
       e_line(acumulado, y_index = 1) |>
-      e_tooltip(trigger = "axis")  
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Suspensiones") |>
+      e_title("Grafico de Pareto del % de total Suspensiones totales") |>
+      e_theme("walden")|>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "Umbral al 80% ") 
     
     
   })
   
+  # Grafico hospitalizacion domiciliaria
+  
+  output$grafico_hospitalizacion<- renderEcharts4r({ 
+    
+    data_hospitalizacion<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_hospitalizacion_domiciliaria.xlsx" ,sheet ="Sheet1" ,rows = 1:13,cols = 1:3 )
+    
+    data_hospitalizacion |>
+      #echarts4r::group_by(Causa.de.suspension) |>
+      echarts4r::e_chart(Componentes) |>
+      echarts4r::e_theme("walden")|> 
+      echarts4r::e_bar(Número.cupos.programados) |>
+      echarts4r::e_bar(Número.cupos.utilizados) |>
+      e_axis_labels(y = "Cupos", x = "Meses") |>
+      e_title("Hospitalización domiciliaria") |>
+      echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
+  })
+    
+    
   shinyWidgets::show_toast(
     title = "Sistema de gestion HBV",
     text = "Este dashboard es solo una version de prueba",
