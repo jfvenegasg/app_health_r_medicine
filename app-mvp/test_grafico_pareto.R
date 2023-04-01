@@ -39,28 +39,48 @@ suspensiones_total |>
               lineStyle = list(type = 'solid'), 
               title = "80% threshold")
 
+#### Carga causas de suspensiones ####
+library(echarts4r)
+library(dplyr)
+
+causas_suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
+causas_suspensiones<-causas_suspensiones[6:35,] |>  arrange(desc(value))
 
 
-
-
-
-Data4Pareto <- data.frame(
-  KPI = c("Price", "Delivery","Quality","Packaging", "Support"),
-  Complaints= c(15,100,15,120,20)) 
-
-Data4Pareto |>
-  arrange(desc(Complaints)) |>
-  mutate(cumm.perc. = (cumsum(Complaints)/sum(Complaints) * 100)) |>
-  e_charts(KPI) |>
-  e_bar(Complaints) |>
-  e_line(cumm.perc., y_index = 1) |>
-  e_axis_labels(y = "Complaints", x = "KPI") |>
-  e_mark_line(data = list(yAxis = 80),
+causas_suspensiones |>
+  mutate(acumulado = cumsum(value)) |>
+  e_charts(target) |>
+  e_bar(value) |>
+  e_line(acumulado, y_index = 1) |>
+  e_tooltip(trigger = "axis")  |>
+  e_axis_labels(y = "Valor", x = "Causas") |>
+  e_title("Grafico de Pareto de las causas de suspensión") |>
+  e_mark_line(data = list(yAxis = 0.80),
               y_index = 1, 
               symbol = "none", 
               lineStyle = list(type = 'solid'), 
-              title = "80% threshold") |>
-  e_tooltip(trigger = "axis")|>
-  e_title("Pareto Chart") |>
-  e_legend(FALSE) |>
-  e_theme("chalk")
+              title = "80% threshold")
+
+
+
+
+# Data4Pareto <- data.frame(
+#   KPI = c("Price", "Delivery","Quality","Packaging", "Support"),
+#   Complaints= c(15,100,15,120,20)) 
+# 
+# Data4Pareto |>
+#   arrange(desc(Complaints)) |>
+#   mutate(cumm.perc. = (cumsum(Complaints)/sum(Complaints) * 100)) |>
+#   e_charts(KPI) |>
+#   e_bar(Complaints) |>
+#   e_line(cumm.perc., y_index = 1) |>
+#   e_axis_labels(y = "Complaints", x = "KPI") |>
+#   e_mark_line(data = list(yAxis = 80),
+#               y_index = 1, 
+#               symbol = "none", 
+#               lineStyle = list(type = 'solid'), 
+#               title = "80% threshold") |>
+#   e_tooltip(trigger = "axis")|>
+#   e_title("Pareto Chart") |>
+#   e_legend(FALSE) |>
+#   e_theme("chalk")

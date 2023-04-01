@@ -131,6 +131,35 @@ function(input, output, session) {
     
   })
   
+  # Grafico de pareto causas de suspension
+  
+  output$grafico_pareto_causas<- renderEcharts4r({ 
+    
+    causas_suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
+    causas_suspensiones<-causas_suspensiones[6:35,] |>  arrange(desc(value))
+    
+    
+    causas_suspensiones |>
+      mutate(acumulado = cumsum(value)) |>
+      e_charts(target) |>
+      e_bar(value) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Causas") |>
+      e_title("Grafico de Pareto de las causas de suspensión") |>
+      e_theme("walden") |>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "80% threshold")
+    
+    
+    
+  })
+  
+  #### Hospitalización domiciliaria ####
+  
   # Grafico hospitalizacion domiciliaria
   
   output$grafico_hospitalizacion<- renderEcharts4r({ 
@@ -148,6 +177,8 @@ function(input, output, session) {
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
   })
     
+  
+  
     
   shinyWidgets::show_toast(
     title = "Sistema de gestion HBV",

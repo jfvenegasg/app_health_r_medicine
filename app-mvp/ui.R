@@ -123,7 +123,8 @@ ui <-  dashboardPage(
                          box(echarts4rOutput("grafico_sankey"),width=12,height="600px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
                 fluidRow(width=12,
                          box(width=6,echarts4rOutput("grafico_pareto_1"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                         box(width=6,echarts4rOutput("grafico_pareto_2"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+                         box(width=6,echarts4rOutput("grafico_pareto_2"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width=12,echarts4rOutput("grafico_pareto_causas"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
                 
         ),
         tabItem(tabName = "menu4",
