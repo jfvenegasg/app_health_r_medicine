@@ -38,17 +38,7 @@ function(input, output, session) {
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"), formatter = "{d}%")
   })
   
-  #tabla utilización de quirofanos
-  output$tabla<-renderReactable({
-    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 1:12,cols = 1:12 ) |> 
-    # xlsx::read.xlsx(file="modulos/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 1:12, colIndex= 1:12
-    #                 , as.data.frame = TRUE, header = TRUE) |>
-    #   dplyr::mutate_if(is.numeric, ~ dplyr::case_when(. < 2 ~ round(., 2), TRUE ~ ceiling(.))) |> 
-      dplyr::mutate_at(8:12, scales::percent) |>
-      reactable::reactable(searchable = TRUE, minRows = 10) 
-    
-  })
-  
+
   
   #### Analisis de suspensiones ####
   
@@ -76,13 +66,120 @@ function(input, output, session) {
       echarts4r::e_charts() |> 
       echarts4r::e_sankey(source, target, value,layoutIterations = 6) |> 
       echarts4r::e_title("Sankey chart") |>
-      echarts4r::e_dims(height = "900px", width = "auto") |>
+      echarts4r::e_dims(height = "600px", width = "auto") |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_tooltip() 
   })
   
+  # Grafico de pareto % de total 15 Años Y Más junto con Causas De Suspensión
+  
+  output$grafico_pareto_1<- renderEcharts4r({ 
+    
+    suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
+    
+    suspensiones<-suspensiones |> mutate(Valor_anual = Valor/12)
+    
+    suspensiones_15<-aggregate(Valor_anual ~ Causa.de.suspension + Descripcion,subset(suspensiones,Descripcion=="% de total 15 Años Y Más junto con Causas De Suspensión Atribuibles A:"), sum)
+    
+    suspensiones_15<-suspensiones_15 |>  arrange(desc(Valor_anual))
+    
+    suspensiones_15 |>
+      mutate(acumulado = cumsum(Valor_anual)) |>
+      e_charts(Causa.de.suspension) |>
+      e_bar(Valor_anual) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Suspensiones") |>
+      e_title("Grafico de Pareto del % de total 15 Años Y Más") |>
+      e_theme("walden")|>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "Umbral al 80% ")
+    
+    
+  })
+  
+  # Grafico de pareto % de total Suspensiones totales junto con Causas De Suspensión
+  
+  output$grafico_pareto_2<- renderEcharts4r({ 
+    
+    suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
+    
+    suspensiones<-suspensiones |> mutate(Valor_anual = Valor/12)
+    
+    suspensiones_total<-aggregate(Valor_anual ~ Causa.de.suspension + Descripcion,subset(suspensiones,Descripcion=="% de total Suspensiones totales junto con Causas De Suspensión Atribuibles A:"), sum)
+    
+    suspensiones_total<-suspensiones_total |>  arrange(desc(Valor_anual))
+    
+    suspensiones_total |>
+      mutate(acumulado = cumsum(Valor_anual)) |>
+      e_charts(Causa.de.suspension) |>
+      e_bar(Valor_anual) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Suspensiones") |>
+      e_title("Grafico de Pareto del % de total Suspensiones totales") |>
+      e_theme("walden")|>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "Umbral al 80% ") 
+    
+    
+  })
+  
+  # Grafico de pareto causas de suspension
+  
+  output$grafico_pareto_causas<- renderEcharts4r({ 
+    
+    causas_suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
+    causas_suspensiones<-causas_suspensiones[6:35,] |>  arrange(desc(value))
+    
+    
+    causas_suspensiones |>
+      mutate(acumulado = cumsum(value)) |>
+      e_charts(target) |>
+      e_bar(value) |>
+      e_line(acumulado, y_index = 1) |>
+      e_tooltip(trigger = "axis")  |>
+      e_axis_labels(y = "Valor", x = "Causas") |>
+      e_title("Grafico de Pareto de las causas de suspensión") |>
+      e_theme("walden") |>
+      e_mark_line(data = list(yAxis = 0.80),
+                  y_index = 1, 
+                  symbol = "none", 
+                  lineStyle = list(type = 'solid'), 
+                  title = "80% threshold")
+    
+    
+    
+  })
+  
+  #### Hospitalización domiciliaria ####
+  
+  # Grafico hospitalizacion domiciliaria
+  
+  output$grafico_hospitalizacion<- renderEcharts4r({ 
+    
+    data_hospitalizacion<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_hospitalizacion_domiciliaria.xlsx" ,sheet ="Sheet1" ,rows = 1:13,cols = 1:3 )
+    
+    data_hospitalizacion |>
+      #echarts4r::group_by(Causa.de.suspension) |>
+      echarts4r::e_chart(Componentes) |>
+      echarts4r::e_theme("walden")|> 
+      echarts4r::e_bar(Número.cupos.programados) |>
+      echarts4r::e_bar(Número.cupos.utilizados) |>
+      e_axis_labels(y = "Cupos", x = "Meses") |>
+      e_title("Hospitalización domiciliaria") |>
+      echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
+  })
+    
   
   
+    
   shinyWidgets::show_toast(
     title = "Sistema de gestion HBV",
     text = "Este dashboard es solo una version de prueba",

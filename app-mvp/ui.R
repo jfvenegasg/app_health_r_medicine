@@ -65,7 +65,10 @@ ui <-  dashboardPage(
                        bs4Dash::menuItem("Reporte quirófanos",tabName="menu2",
                                          icon=icon("check-square")),
                        bs4Dash::menuItem("Análisis suspenciones",tabName="menu3",
-                                         icon=icon("user-doctor"))),
+                                         icon=icon("user-doctor")),
+                       bs4Dash::menuItem("Hospitalización domiciliaria",tabName="menu4",
+                                         icon=icon("user-doctor"))
+                       ),
                      actionButton(
                        "sign_out",
                        "Sign Out",
@@ -117,10 +120,20 @@ ui <-  dashboardPage(
                                          valueBox(width = 12,value = shiny::h3("42%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal paciente",
                                                   icon = icon("check")),valueBox(width = 12,value=shiny::h3("23%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal equipo quirúrgico",icon = icon("check")))),
                 fluidRow(width=12,
-                         box(echarts4rOutput("grafico_sankey"),width=12,height="900px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
+                         box(echarts4rOutput("grafico_sankey"),width=12,height="600px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
                 fluidRow(width=12,
-                         box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                         box(width=6,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+                         box(width=6,echarts4rOutput("grafico_pareto_1"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width=6,echarts4rOutput("grafico_pareto_2"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width=12,echarts4rOutput("grafico_pareto_causas"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+                
+        ),
+        tabItem(tabName = "menu4",
+                fluidRow(width=12,
+                         box(width=9,echarts4rOutput("grafico_hospitalizacion"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         bs4Dash:: column(width = 3,
+                                          valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                          valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "teal",icon = icon("check"))))
                 
         )
         
