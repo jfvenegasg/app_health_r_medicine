@@ -66,8 +66,12 @@ ui <-  dashboardPage(
                        bs4Dash::menuItem("Reporte quirófanos",tabName="menu2",
                                          icon=icon("check-square")),
                        bs4Dash::menuItem("Análisis suspenciones",tabName="menu3",
-                                         icon=icon("user-doctor")),
+                                         icon=icon("user-doctor"),
+                       bs4Dash::menuSubItem(text = "Suspenciones por causa",tabName ="menu3_1" ,icon =icon("user-doctor") ),
+                       bs4Dash::menuSubItem(text = "Suspenciones por especialidad",tabName = "menu3_2",icon =icon("user-doctor") )),
                        bs4Dash::menuItem("Hospitalización domiciliaria",tabName="menu4",
+                                         icon=icon("user-doctor")),
+                       bs4Dash::menuItem("Dias de estadia",tabName="menu5",
                                          icon=icon("user-doctor"))
                        ),
                      actionButton(
@@ -114,7 +118,7 @@ ui <-  dashboardPage(
                              status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
                 )),
         
-        tabItem(tabName = "menu3",
+        tabItem(tabName = "menu3_1",
                 fluidRow(width=12,
                          box(echarts4rOutput("grafico_barra"),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
                          bs4Dash::column(width=3,
@@ -128,6 +132,11 @@ ui <-  dashboardPage(
                          box(width=12,echarts4rOutput("grafico_pareto_causas"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
                 
         ),
+        tabItem(tabName = "menu3_2",
+                fluidRow(width=12,box(echarts4rOutput("grafico_susp_esp2"),width=12,height="600px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"))
+                
+                
+        ),
         tabItem(tabName = "menu4",
                 fluidRow(width=12,
                          box(width=9,echarts4rOutput("grafico_hospitalizacion"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
@@ -135,6 +144,21 @@ ui <-  dashboardPage(
                                           valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
                                           valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "teal",icon = icon("check"))))
+                
+        ),
+        tabItem(tabName = "menu5",
+                fluidRow(width=12,
+                         box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_1","Seleccion de especialidad",
+                                                                                                                           choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
+                                                                                                                                       "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
+                                                                                                                                       , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
+                                                                                                                                       , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
+                                                                                                                                       , "Resto especialdiades"="RESTO ESPECIALIDADES"))),
+                         box(width=9,echarts4rOutput("dias_estada_especialidad"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_2","Seleccion de especialidad", choices = c("Enero"="enero","Febrero"="febrero",
+                                                                                                                                                                                 "Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
+                                                                                                                                                                                 , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre"))),)
                 
         )
         
