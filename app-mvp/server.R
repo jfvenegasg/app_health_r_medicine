@@ -116,5 +116,43 @@ susp_esp2<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensio
       echarts4r::e_theme("walden")|> 
       echarts4r::e_bar(cantidad,stack="Tipo") |>
       echarts4r::e_flip_coords() |>
-      echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"),formatter = echarts4r::e_tooltip_item_formatter("percent"))
+      echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
+})
+
+#### días de estada ####
+
+# en el ui incluir: selectInput("selector_1","Seleccion de especialidad",
+# choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
+#"Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
+#, "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
+#, "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
+# , "Resto especialdiades"="RESTO ESPECIALIDADES")),
+
+
+output$dias_estada_mensual<- renderEcharts4r({ 
+  dias_estada<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_dias_estada.xlsx" ,sheet ="Hoja1" ,rows = 1:145,cols = c(1,2,3,4,9) ))
+      subset(dias_estada,Especialidad=="CIRUGÍA GENERAL") |> #subset(dias_estada,Especialidad==input$selector_1) |>
+      echarts4r::e_chart(Mes) |>
+      echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = "Días de estada prequirurgicos totales") |>
+      echarts4r::e_bar(Pacientes.intervenidos.totales.,name = "Pacientes intervenidos totales") |>
+      echarts4r::e_line(Dias.de.estada.promedio, y_index =1,name = "Días de estada promedio por paciente") |> 
+      echarts4r::e_theme("walden")|> 
+      echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
+})
+
+# en el ui incluir: selectInput("selector_2","Seleccion de especialidad", choices = c("Enero"="enero","Febrero"="febrero",
+#"Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
+#, "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre")),
+
+output$dias_estada_especialidad<- renderEcharts4r({ 
+    dias_estada<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_dias_estada.xlsx" ,sheet ="Hoja1" ,rows = 1:145,cols = c(1,2,3,4,9)))
+      subset(dias_estada,Mes=="enero") |> #subset(dias_estada,Mes==input$selector_2) |>
+      dplyr::arrange(Dias.de.estada.promedio)|>
+      echarts4r::e_chart(Especialidad) |>
+      echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = "Días de estada prequirurgicos totales") |>
+      echarts4r::e_bar(Pacientes.intervenidos.totales., name = "Pacientes intervenidos totales") |>
+      echarts4r::e_line(Dias.de.estada.promedio, y_index =1,name = "Días de estada promedio por paciente") |> 
+      echarts4r::e_theme("walden")|> 
+      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 45)) |> 
+      echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
 })
