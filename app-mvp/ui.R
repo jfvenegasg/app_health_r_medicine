@@ -21,7 +21,8 @@ library(htmltools)
 library(lubridate)
 library(shinyWidgets)
 library(shinycssloaders)
-library(DBI)
+library(reticulate)
+
 
 ui <-  dashboardPage(
     dashboardHeader(title = "Sistema de gestion HBV",rightUi = dropdownMenu(
