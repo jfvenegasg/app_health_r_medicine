@@ -189,7 +189,6 @@ function(input, output, session) {
     width = "800"
   )
 
-}
 
   #### Análisis de suspensiones por especialidad ####
 
@@ -228,7 +227,8 @@ susp_esp2<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensio
 
 output$dias_estada_mensual<- renderEcharts4r({ 
   dias_estada<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_dias_estada.xlsx" ,sheet ="Hoja1" ,rows = 1:145,cols = c(1,2,3,4,9) ))
-      subset(dias_estada,Especialidad=="CIRUGÍA GENERAL") |> #subset(dias_estada,Especialidad==input$selector_1) |>
+      #subset(dias_estada,Especialidad=="CIRUGÍA GENERAL") |> 
+      subset(dias_estada,Especialidad==input$selector_1) |>
       echarts4r::e_chart(Mes) |>
       echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = "Días de estada prequirurgicos totales") |>
       echarts4r::e_bar(Pacientes.intervenidos.totales.,name = "Pacientes intervenidos totales") |>
@@ -243,7 +243,8 @@ output$dias_estada_mensual<- renderEcharts4r({
 
 output$dias_estada_especialidad<- renderEcharts4r({ 
     dias_estada<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_dias_estada.xlsx" ,sheet ="Hoja1" ,rows = 1:145,cols = c(1,2,3,4,9)))
-      subset(dias_estada,Mes=="enero") |> #subset(dias_estada,Mes==input$selector_2) |>
+      #subset(dias_estada,Mes=="enero") |> 
+      subset(dias_estada,Mes==input$selector_2) |>
       dplyr::arrange(Dias.de.estada.promedio)|>
       echarts4r::e_chart(Especialidad) |>
       echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = "Días de estada prequirurgicos totales") |>
@@ -253,3 +254,5 @@ output$dias_estada_especialidad<- renderEcharts4r({
       echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 45)) |> 
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
 })
+
+}
