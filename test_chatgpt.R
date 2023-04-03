@@ -1,7 +1,7 @@
 library(chatgpt)
 # install.packages("pak")
 # pak::pak("MichelNivard/gptstudio")
-Sys.setenv(OPENAI_API_KEY = "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")
+Sys.setenv(OPENAI_API_KEY = "")
 
 cat(chatgpt::ask_chatgpt(question = "que es una manzana"))
 
