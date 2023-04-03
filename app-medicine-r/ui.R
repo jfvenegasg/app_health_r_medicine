@@ -25,7 +25,7 @@ library(reticulate)
 
 
 ui <-  dashboardPage(
-    dashboardHeader(title = "Sistema de gestion HBV",rightUi = dropdownMenu(
+    dashboardHeader(title = "Sistema de gestion HCM",rightUi = dropdownMenu(
       badgeStatus = "danger",
       type = "messages",
       messageItem(
