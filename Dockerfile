@@ -35,7 +35,7 @@ RUN R -q -e 'install.packages(c(\
               "lubridate", \
               "shinyWidgets", \
               "shinycssloaders", \
-              "DBI" \
+              "reticulate" \
             ), \
             repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-01-13"\
           )'
@@ -47,12 +47,12 @@ RUN R -q -e 'install.packages(c(\
 #RUN R -q -e "install.packages('Rmpfr')"
 
 # copy the app to the image
-RUN mkdir /root/app-mvp
-COPY app-mvp /root/app-mvp
+RUN mkdir /root/app-medicine-r
+COPY app-medicine-r /root/app-medicine-r
 
 COPY Rprofile.site /usr/local/lib/R/etc/
 
 EXPOSE 3838
 
-CMD ["R", "-q", "-e", "shiny::runApp('/root/app-mvp')"]
+CMD ["R", "-q", "-e", "shiny::runApp('/root/app-medicine-r')"]
 
