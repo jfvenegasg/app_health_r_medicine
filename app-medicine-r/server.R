@@ -15,9 +15,7 @@ function(input, output, session) {
   #### Carga de imagen ####
   output$myImage <- renderImage({
     
-    list(src = "modulos/data/imagen_inicio.jpg",
-         width = "100%",
-         height = 175)
+    list(src = "modulos/data/imagen_de_inicio.png")
     
   }, deleteFile = F)
   
