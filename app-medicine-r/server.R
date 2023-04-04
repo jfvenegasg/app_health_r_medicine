@@ -204,6 +204,34 @@ susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supension
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
 
+
+#  total<-sum(susp_esp$cantidad)
+  
+
+  # output$grafico_circular1<- renderEcharts4r({ 
+  #   susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
+  #   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
+  #     echarts4r::e_chart(Tipo) |>
+  #     echarts4r::e_pie(cantidad, radius = c("40%", "70%")) |>
+  #     echarts4r::e_theme("walden")|>
+  #     echarts4r::e_labels(show = TRUE,
+  #                         formatter = "{d}%",
+  #                         position = "inside")|>
+  #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
+  # })
+  # 
+  # output$grafico_circular2<- renderEcharts4r({ 
+  #   aggregate(cantidad ~ Especialidad, data=susp_esp,FUN = sum) |> 
+  #     echarts4r::e_chart(Especialidad) |>
+  #     echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE) |>
+  #     echarts4r::e_theme("walden")|>
+  #     echarts4r::e_labels(show = TRUE,
+  #                         formatter = "{d}%",
+  #                         position = "inside")|>
+  #     echarts4r::e_legend(type="scroll") |>
+  #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
+  # })
+
 #total<-sum(susp_esp$cantidad)
 
 susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
@@ -230,6 +258,7 @@ output$grafico_circular2<- renderEcharts4r({
     echarts4r::e_legend(type="scroll") |>
     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
+
 
 
 #### días de estada ####
