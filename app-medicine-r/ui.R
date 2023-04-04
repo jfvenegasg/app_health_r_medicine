@@ -70,9 +70,9 @@ ui <-  dashboardPage(
                        bs4Dash::menuSubItem(text = "Suspenciones por causa",tabName ="menu3_1" ,icon =icon("user-doctor") ),
                        bs4Dash::menuSubItem(text = "Suspenciones por especialidad",tabName = "menu3_2",icon =icon("user-doctor") )),
                        bs4Dash::menuItem("Hospitalización domiciliaria",tabName="menu4",
-                                         icon=icon("user-doctor")),
+                                         icon=icon("house")),
                        bs4Dash::menuItem("Dias de estadia",tabName="menu5",
-                                         icon=icon("user-doctor"))
+                                         icon=icon("bed-pulse"))
                        ),
                      actionButton(
                        "sign_out",
@@ -133,7 +133,7 @@ ui <-  dashboardPage(
                 
         ),
         tabItem(tabName = "menu3_2",
-                fluidRow(width=12,box(echarts4rOutput("grafico_susp_esp2"),width=12,height="600px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"))
+                fluidRow(width=12,box(echarts4rOutput("grafico_susp_esp"),width=12,height="400px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"))
                 
                 
         ),
@@ -148,15 +148,15 @@ ui <-  dashboardPage(
         ),
         tabItem(tabName = "menu5",
                 fluidRow(width=12,
-                         box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                         box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,title = "Días de estadia y pacientes intervenidos por mes"),
                          box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_1","Seleccion de especialidad",
                                                                                                                            choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
                                                                                                                                        "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                        , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                        , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
                                                                                                                                        , "Resto especialdiades"="RESTO ESPECIALIDADES"))),
-                         box(width=9,echarts4rOutput("dias_estada_especialidad"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                         box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_2","Seleccion de especialidad", choices = c("Enero"="enero","Febrero"="febrero",
+                         box(width=9,echarts4rOutput("dias_estada_especialidad"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, height = "500px", title = "Días de estadía y pacientes intervenidos por especialidad"),
+                         box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_2","Seleccion de mes", choices = c("Enero"="enero","Febrero"="febrero",
                                                                                                                                                                                  "Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
                                                                                                                                                                                  , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre"))),)
                 
