@@ -204,7 +204,7 @@ susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supension
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
 
-<<<<<<< HEAD
+
 #  total<-sum(susp_esp$cantidad)
   
 
@@ -231,7 +231,7 @@ susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supension
   #     echarts4r::e_legend(type="scroll") |>
   #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
   # })
-=======
+
 #total<-sum(susp_esp$cantidad)
 
 susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
@@ -258,7 +258,7 @@ output$grafico_circular2<- renderEcharts4r({
     echarts4r::e_legend(type="scroll") |>
     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
->>>>>>> main
+
 
 
 #### días de estada ####
