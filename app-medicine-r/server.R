@@ -66,7 +66,6 @@ function(input, output, session) {
     data.frame(datos_suspensiones_sankey) |> 
       echarts4r::e_charts() |> 
       echarts4r::e_sankey(source, target, value,layoutIterations = 6) |> 
-      echarts4r::e_title("Sankey chart") |>
       echarts4r::e_dims(height = "600px", width = "auto") |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_tooltip() 
@@ -91,8 +90,9 @@ function(input, output, session) {
       e_line(acumulado, y_index = 1) |>
       e_tooltip(trigger = "axis")  |>
       e_axis_labels(y = "Valor", x = "Suspensiones") |>
-      e_title("Grafico de Pareto del % de total 15 Años Y Más") |>
       e_theme("walden")|>
+      e_x_axis(axisLabel = list(interval = 0, rotate = 45)) |> 
+      e_grid(bottom="150")|>
       e_mark_line(data = list(yAxis = 0.80),
                   y_index = 1, 
                   symbol = "none", 
@@ -121,8 +121,9 @@ function(input, output, session) {
       e_line(acumulado, y_index = 1) |>
       e_tooltip(trigger = "axis")  |>
       e_axis_labels(y = "Valor", x = "Suspensiones") |>
-      e_title("Grafico de Pareto del % de total Suspensiones totales") |>
       e_theme("walden")|>
+      e_x_axis(axisLabel = list(interval = 0, rotate = 45)) |> 
+      e_grid(bottom="150")|>
       e_mark_line(data = list(yAxis = 0.80),
                   y_index = 1, 
                   symbol = "none", 
@@ -147,7 +148,6 @@ function(input, output, session) {
       e_line(acumulado, y_index = 1) |>
       e_tooltip(trigger = "axis")  |>
       e_axis_labels(y = "Valor", x = "Causas") |>
-      e_title("Grafico de Pareto de las causas de suspensión") |>
       e_theme("walden") |>
       e_mark_line(data = list(yAxis = 0.80),
                   y_index = 1, 
@@ -192,15 +192,16 @@ function(input, output, session) {
 
 
   #### Análisis de suspensiones por especialidad ####
-  
+  susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 )) 
 output$grafico_susp_esp<- renderEcharts4r({ 
-susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
+    susp_esp |>
     data.frame(susp_esp) |>
       echarts4r::group_by(Tipo) |>
       echarts4r::e_chart(Especialidad) |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_bar(cantidad,stack="Tipo") |>
       echarts4r::e_flip_coords() |>
+      e_grid(left = "15%")|>
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
 
@@ -232,9 +233,9 @@ susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supension
   #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
   # })
 
-#total<-sum(susp_esp$cantidad)
+output$Total<-renderText({ sum(susp_esp$cantidad)})
 
-susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
+
 output$grafico_circular1<- renderEcharts4r({ 
   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
     echarts4r::e_chart(Tipo) |>
@@ -283,6 +284,9 @@ output$dias_estada_mensual<- renderEcharts4r({
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
 })
 
+output$dias_totales_especialidad<- renderText({ sum(dias_estada$Dias.de.estada.prequirurgicos.totales[dias_estada$Especialidad==input$selector_1])
+})
+
 # en el ui incluir: selectInput("selector_2","Seleccion de especialidad", choices = c("Enero"="enero","Febrero"="febrero",
 #"Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
 #, "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre")),
@@ -297,7 +301,8 @@ output$dias_estada_especialidad<- renderEcharts4r({
       echarts4r::e_bar(Pacientes.intervenidos.totales., name = "Pacientes intervenidos totales") |>
       echarts4r::e_line(Dias.de.estada.promedio, y_index =1,name = "Días de estada promedio por paciente") |> 
       echarts4r::e_theme("walden")|> 
-      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 30)) |> 
+      echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 45)) |>
+      echarts4r::e_grid(bottom="80")|>
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"))
 })
 
