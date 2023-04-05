@@ -121,20 +121,26 @@ ui <-  dashboardPage(
       
       tabItem(tabName = "menu3_1",
               fluidRow(width=12,
-                       box(echarts4rOutput("grafico_barra"),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
+                       box(echarts4rOutput("grafico_barra"),title= "Motivos de suspención por mes",width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
                        bs4Dash::column(width=3,
                                        valueBox(width = 12,value = shiny::h3("42%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal paciente",
                                                 icon = icon("check")),valueBox(width = 12,value=shiny::h3("23%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal equipo quirúrgico",icon = icon("check")))),
               fluidRow(width=12,
-                       box(echarts4rOutput("grafico_sankey"),width=12,height="600px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
+                       box(echarts4rOutput("grafico_sankey"),title= "Desgloce motivos de suspención cirugías",width=12,height="620px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
               fluidRow(width=12,
-                       box(width=6,echarts4rOutput("grafico_pareto_1"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                       box(width=6,echarts4rOutput("grafico_pareto_2"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                       box(width=12,echarts4rOutput("grafico_pareto_causas"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+                       box(width=6,echarts4rOutput("grafico_pareto_1"),title= "Grafico de Pareto del % de total 15 Años Y Más",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                       box(width=6,echarts4rOutput("grafico_pareto_2"),title= "Grafico de Pareto del % de total Suspensiones totales",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
+                       box(width=12,echarts4rOutput("grafico_pareto_causas"),height = "1000px",title= "Gráfico pareto de las causas de suspención",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
               
       ),
       tabItem(tabName = "menu3_2",
-              fluidRow(width=12,box(echarts4rOutput("grafico_susp_esp"),width=12,height="400px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"))
+              fluidRow(width=12,
+                       valueBox(width = 12, subtitle = "Suspenciones totales 2022",value = shiny::h3(textOutput("Total"), style = 'font-size:27px'),color = "teal",icon = icon("check"))),
+              fluidRow(width=12,
+                       box(echarts4rOutput("grafico_circular1"),title= "Distribución suspenciones por tipo de cirugía",width=6,height="400px",reorder= TRUE,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"),
+                       box(echarts4rOutput("grafico_circular2"),title= "Distribución suspenciones por especialidad",width=6,height="400px",reorder= TRUE,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
+              fluidRow(width=12,
+                       box(echarts4rOutput("grafico_susp_esp"),title= "Cantidad de suspenciones por especialidad y tipo de cirugía",width=12,height="400px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"))
               
               
       ),
@@ -150,16 +156,19 @@ ui <-  dashboardPage(
       tabItem(tabName = "menu5",
               fluidRow(width=12,
                        box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,title = "Días de estadia y pacientes intervenidos por mes"),
-                       box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_1","Seleccion de especialidad",
+                       column(width = 3,
+                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_1","Seleccion de especialidad",
                                                                                                                          choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
                                                                                                                                      "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                      , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                      , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
                                                                                                                                      , "Resto especialdiades"="RESTO ESPECIALIDADES"))),
+                              valueBox(width = 12,subtitle = "Días totales de estadía",value = shiny::h3(textOutput("dias_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),
+              fluidRow(width=12,                
                        box(width=9,echarts4rOutput("dias_estada_especialidad"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, height = "500px", title = "Días de estadía y pacientes intervenidos por especialidad"),
                        box(width = 3,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,selectInput("selector_2","Seleccion de mes", choices = c("Enero"="enero","Febrero"="febrero",
                                                                                                                                                                       "Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
-                                                                                                                                                                      , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre"))),)
+                                                                                                                                                                      , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre"))))
               
       )
       
