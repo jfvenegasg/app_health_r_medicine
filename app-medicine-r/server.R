@@ -19,6 +19,16 @@ function(input, output, session) {
     
   }, deleteFile = F)
   
+  #### Mensaje emergente ####
+  shinyWidgets::show_toast(
+    title = "Sistema de gestion HBV",
+    text = "Este dashboard es solo una version de prueba",
+    type = "info",
+    position = "top",
+    timer=2000,
+    width = "800"
+  )
+  
   #### Reporte quirofanos ####
   
   #grafico utilización de quirofanos
@@ -29,15 +39,34 @@ function(input, output, session) {
     # datos |>
     # xlsx::read.xlsx(file="modulos/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 15:37, colIndex= 5:7
     #                 , as.data.frame = TRUE, header = TRUE) |> 
-    #   echarts4r::group_by(Tipo.de.hora) |>
+      echarts4r::group_by(Tipo.de.hora) |>
       echarts4r::e_chart(Mes) |>
       echarts4r::e_bar(Valor) |>
       echarts4r::e_mark_p(type = "line",
-                          data = list(yAxis = 0.6), 
+                          serie_index = 1,
+                          data = list(yAxis = aggregate(Valor ~ Tipo.de.hora, data, mean)[1,2]), 
+                          title = "Line at 50") |>
+      echarts4r::e_mark_p(type = "line",
+                          serie_index = 2,
+                          data = list(yAxis = aggregate(Valor ~ Tipo.de.hora, data, mean)[2,2]), 
                           title = "Line at 50") |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_tooltip(trigger = "axis",axisPointer = list(type = "shadow"), formatter = "{d}%")
   })
+  
+  quirofanos<-openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7 ) 
+  
+  x<-mean(quirofanos$Valor[quirofanos$Tipo.de.hora=="% trabajo respecto a habilitado"])
+  x<-sprintf("%0.2f%%", x*100)
+  output$utilización_quirófanos<-renderText({x})
+  
+  y<-mean(quirofanos$Valor[quirofanos$Tipo.de.hora=="% programado respecto a habilitado"])
+  y<-sprintf("%0.2f%%", y*100)
+  output$programadas_habilitadas<-renderText({y})
+  
+  z<-mean(quirofanos$Valor[quirofanos$Tipo.de.hora=="% trabajo respecto a habilitado"])/mean(quirofanos$Valor[quirofanos$Tipo.de.hora=="% programado respecto a habilitado"])
+  z<-sprintf("%0.2f%%", z*100)
+  output$ocupadas_programadas<-renderText({z})
   
 
   
@@ -97,7 +126,7 @@ function(input, output, session) {
                   y_index = 1, 
                   symbol = "none", 
                   lineStyle = list(type = 'solid'), 
-                  title = "Umbral al 80% ")
+                  title = "")
     
     
   })
@@ -128,7 +157,7 @@ function(input, output, session) {
                   y_index = 1, 
                   symbol = "none", 
                   lineStyle = list(type = 'solid'), 
-                  title = "Umbral al 80% ") 
+                  title = "") 
     
     
   })
@@ -137,14 +166,14 @@ function(input, output, session) {
   
   output$grafico_pareto_causas<- renderEcharts4r({ 
     
-    causas_suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
-    causas_suspensiones<-causas_suspensiones[6:35,] |>  arrange(desc(value))
+    causas_suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:4 )
+    causas_suspensiones<-causas_suspensiones[6:35,] |>  arrange(desc(porcentaje))
     
     
     causas_suspensiones |>
-      mutate(acumulado = cumsum(value)) |>
+      mutate(acumulado = cumsum(porcentaje)) |>
       e_charts(target) |>
-      e_bar(value) |>
+      e_bar(porcentaje) |>
       e_line(acumulado, y_index = 1) |>
       e_tooltip(trigger = "axis")  |>
       e_axis_labels(y = "Valor", x = "Causas") |>
@@ -155,7 +184,8 @@ function(input, output, session) {
       e_mark_line(data = list(yAxis = 0.80),
                   y_index = 1, 
                   symbol = "none", 
-                  lineStyle = list(type = 'solid'))
+                  lineStyle = list(type = 'solid'),
+                  title="")
     
     
     
@@ -165,31 +195,29 @@ function(input, output, session) {
   
   # Grafico hospitalizacion domiciliaria
   
+  data_hospitalizacion<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_hospitalizacion_domiciliaria.xlsx" ,sheet ="Sheet1" ,rows = 1:13,cols = 1:3 )
+  
   output$grafico_hospitalizacion<- renderEcharts4r({ 
-    
-    data_hospitalizacion<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_hospitalizacion_domiciliaria.xlsx" ,sheet ="Sheet1" ,rows = 1:13,cols = 1:3 )
-    
     data_hospitalizacion |>
       #echarts4r::group_by(Causa.de.suspension) |>
       echarts4r::e_chart(Componentes) |>
       echarts4r::e_theme("walden")|> 
-      echarts4r::e_bar(Número.cupos.programados) |>
-      echarts4r::e_bar(Número.cupos.utilizados) |>
+      echarts4r::e_bar(Número.cupos.programados, name = "Número de cupos programados") |>
+      echarts4r::e_bar(Número.cupos.utilizados, name = "Número de cupos utilizados") |>
+      echarts4r::e_mark_p(type = "line",
+                          serie_index = 1,
+                          data = list(yAxis = mean(data_hospitalizacion$Número.cupos.programados)), 
+                          title = "Line at 50") |>
+      echarts4r::e_mark_p(type = "line",
+                          serie_index = 2,
+                          data = list(yAxis = mean(data_hospitalizacion$Número.cupos.utilizados)), 
+                          title = "Line at 50") |>
       e_axis_labels(y = "Cupos", x = "Meses") |>
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
   })
     
   
   
-    
-  shinyWidgets::show_toast(
-    title = "Sistema de gestion HBV",
-    text = "Este dashboard es solo una version de prueba",
-    type = "info",
-    position = "top",
-    timer=2000,
-    width = "800"
-  )
 
 
   #### Análisis de suspensiones por especialidad ####
@@ -206,35 +234,6 @@ output$grafico_susp_esp<- renderEcharts4r({
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
 
-
-#  total<-sum(susp_esp$cantidad)
-  
-
-  # output$grafico_circular1<- renderEcharts4r({ 
-  #   susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 ))
-  #   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
-  #     echarts4r::e_chart(Tipo) |>
-  #     echarts4r::e_pie(cantidad, radius = c("40%", "70%")) |>
-  #     echarts4r::e_theme("walden")|>
-  #     echarts4r::e_labels(show = TRUE,
-  #                         formatter = "{d}%",
-  #                         position = "inside")|>
-  #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
-  # })
-  # 
-  # output$grafico_circular2<- renderEcharts4r({ 
-  #   aggregate(cantidad ~ Especialidad, data=susp_esp,FUN = sum) |> 
-  #     echarts4r::e_chart(Especialidad) |>
-  #     echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE) |>
-  #     echarts4r::e_theme("walden")|>
-  #     echarts4r::e_labels(show = TRUE,
-  #                         formatter = "{d}%",
-  #                         position = "inside")|>
-  #     echarts4r::e_legend(type="scroll") |>
-  #     echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
-  # })
-
-output$Total<-renderText({ sum(susp_esp$cantidad)})
 
 
 output$grafico_circular1<- renderEcharts4r({ 
