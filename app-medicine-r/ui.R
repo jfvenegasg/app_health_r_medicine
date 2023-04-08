@@ -110,13 +110,10 @@ ui <-  dashboardPage(
                            status = "lightblue",headerBorder = FALSE,collapsible = FALSE),
                        
                        bs4Dash:: column(width = 3,
-                                        valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                        valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                        valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "teal",icon = icon("check"))),
-                       
-                       
-                       box(width = 12,title = "Utilización de quirófanos",closable = FALSE,elevation = 2, reactableOutput("tabla"),
-                           status = "lightblue",headerBorder = FALSE,collapsible = FALSE)
+                                        valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3(textOutput("utilización_quirófanos"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                        valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3(textOutput("programadas_habilitadas"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                        valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3(textOutput("ocupadas_programadas"), style = 'font-size:27px'),color = "teal",icon = icon("check"))),
+                      
               )),
       
       tabItem(tabName = "menu3_1",
@@ -134,8 +131,6 @@ ui <-  dashboardPage(
               
       ),
       tabItem(tabName = "menu3_2",
-              fluidRow(width=12,
-                       valueBox(width = 12, subtitle = "Suspenciones totales 2022",value = shiny::h3(textOutput("Total"), style = 'font-size:27px'),color = "teal",icon = icon("check"))),
               fluidRow(width=12,
                        box(echarts4rOutput("grafico_circular1"),title= "Distribución suspenciones por tipo de cirugía",width=6,height="400px",reorder= TRUE,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue"),
                        box(echarts4rOutput("grafico_circular2"),title= "Distribución suspenciones por especialidad",width=6,height="400px",reorder= TRUE,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
