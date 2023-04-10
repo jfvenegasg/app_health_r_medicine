@@ -1,0 +1,11 @@
+{
+  "cultural_date_format": "%d-%m-%Y",
+  "languages": ["es", "en"],
+  "translation": [
+    {
+     "es": "Sistema de gestion HCM",
+     "en": "Management System"
+     }
+
+  ]
+}

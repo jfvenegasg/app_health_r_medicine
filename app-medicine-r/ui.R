@@ -22,11 +22,12 @@ library(lubridate)
 library(shinyWidgets)
 library(shinycssloaders)
 library(reticulate)
-
+library(shiny.i18n)
+source("traductor.R")
 
 ui <-  dashboardPage(
 
-  dashboardHeader(title = "Sistema de gestion HCM",rightUi = dropdownMenu(
+  dashboardHeader(title = i18n$t("Sistema de gestion HCM"),rightUi = dropdownMenu(
     badgeStatus = "danger",
     type = "messages",
     messageItem(
