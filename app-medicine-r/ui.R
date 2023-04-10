@@ -69,10 +69,10 @@ ui <-  dashboardPage(
                      bs4Dash::menuItem("Análisis suspenciones",tabName="menu3",
                                        icon=icon("user-doctor"),
                                        bs4Dash::menuSubItem(text = "Suspenciones por causa",tabName ="menu3_1" ,icon =icon("user-doctor") ),
-                                       bs4Dash::menuSubItem(text = "Suspenciones por especialidad",tabName = "menu3_2",icon =icon("user-doctor") )),
+                                       bs4Dash::menuSubItem(text = "Susp. por especialidad",tabName = "menu3_2",icon =icon("user-doctor") )),
                      bs4Dash::menuItem("Hospitalización domiciliaria",tabName="menu4",
                                        icon=icon("house")),
-                     bs4Dash::menuItem("Dias de estadia",tabName="menu5",
+                     bs4Dash::menuItem("Dias de estadía",tabName="menu5",
                                        icon=icon("bed-pulse"))
                    ),
                    actionButton(
@@ -85,19 +85,21 @@ ui <-  dashboardPage(
   ),
   dashboardBody(
     tabItems(
-      tabItem(tabName = "menu1",
-              fluidRow(width=12, imageOutput("myImage")),
-              # Boxes need to be put in a row (or column)
+      tabItem(tabName = "menu1",imageOutput("myImage"),
+         # Boxes need to be put in a row (or column)
               fluidRow(width=12,
-                       bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "lightblue"),width = 6,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Este menú contiene estadísticas de ocupación de quirófanos", 
-                                        icon=shiny::icon("arrow-pointer"), tabName = "menu5_1",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
-                       bs4Dash::infoBox(bs4Dash::bs4Ribbon(text = "Nuevo",color = "lightblue"),width = 6,title = shiny::h3("Análisis tiempo real vs programado", style = 'font-size:30px'),subtitle="Datos acerca de las cirugías que exceden el tiempo programdo", 
-                                        icon=shiny::icon("arrow-pointer"), tabName = "menu5_2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
+                       bs4Dash::infoBox(width = 12,title = shiny::h3("Reporte quirófanos", style = 'font-size:30px'),subtitle="Datos y estadísticas acerca de la programación y ocupación de quirófanos", 
+                                        icon=shiny::icon("arrow-pointer"), tabName = "menu2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
               fluidRow(width=12,
-                       bs4Dash::infoBox(width = 6,title = shiny::h3("Duración cirugías", style = 'font-size:30px'),subtitle="Datos históricos de la duración de distintos tipos de cirugías", 
-                                        icon=shiny::icon("arrow-pointer"), tabName = "menu5_3",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
-                       bs4Dash::infoBox(width = 6,title = shiny::h3("Análisis suspenciones", style = 'font-size:30px'),subtitle="Se presentan datos acerca de las causas de suspención de cirugías", 
-                                        icon=shiny::icon("arrow-pointer"), tabName = "menu5_4",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2))
+                       bs4Dash::infoBox(width = 6,title = shiny::h3("Supenciones por causa", style = 'font-size:30px'),subtitle="Datos y estadísticas sobre las causas que generan suspenciones de cirugías", 
+                                        icon=shiny::icon("arrow-pointer"), tabName = "menu3_1",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
+                       bs4Dash::infoBox(width = 6,title = shiny::h3("Supenciones por especialidad", style = 'font-size:30px'),subtitle="Datos y estadísticas sobre la cantidad de suspenciones por especialidad", 
+                                        icon=shiny::icon("arrow-pointer"), tabName = "menu3_2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
+              fluidRow(width=12,
+                       bs4Dash::infoBox(width = 6,title = shiny::h3("Hospitalización domiciliaria", style = 'font-size:30px'),subtitle="Datos y estadísticas acerca de la programación y utilización de cupos de hospitalización domiciliaria", 
+                                        icon=shiny::icon("arrow-pointer"), tabName = "menu4",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
+                       bs4Dash::infoBox(width = 6,title = shiny::h3("Días de estadía", style = 'font-size:30px'),subtitle="Datos y estadísticas acerca de los días de estadía de los pacientes según tipo de cirugía y mes", 
+                                        icon=shiny::icon("arrow-pointer"), tabName = "menu5",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2))
       ), 
       
       
@@ -120,8 +122,9 @@ ui <-  dashboardPage(
               fluidRow(width=12,
                        box(echarts4rOutput("grafico_barra"),title= "Motivos de suspención por mes",width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
                        bs4Dash::column(width=3,
-                                       valueBox(width = 12,value = shiny::h3("42%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal paciente",
-                                                icon = icon("check")),valueBox(width = 12,value=shiny::h3("23%", style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal equipo quirúrgico",icon = icon("check")))),
+                                       valueBox(width = 12,value = shiny::h3(textOutput("susp_totales"), style = 'font-size:27px'),color = "teal",subtitle="Suspenciones totales año 2022",icon = icon("check")),
+                                       valueBox(width = 12,value = shiny::h3(textOutput("porcentaje_paciente"), style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal paciente",icon = icon("check")),
+                                       valueBox(width = 12,value=shiny::h3(textOutput("porcentaje_equipo"), style = 'font-size:27px'),color = "teal",subtitle="Suspenciones debido a la causal equipo quirúrgico",icon = icon("check")))),
               fluidRow(width=12,
                        box(echarts4rOutput("grafico_sankey"),title= "Desgloce motivos de suspención cirugías",width=12,height="620px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
               fluidRow(width=12,
@@ -143,9 +146,9 @@ ui <-  dashboardPage(
               fluidRow(width=12,
                        box(width=9,echarts4rOutput("grafico_hospitalizacion"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,title = "Hospitalización domiciliaria",status = "lightblue"),
                        bs4Dash:: column(width = 3,
-                                        valueBox(width = 12,subtitle = "Promedio porcentaje de ocupación quirófanos",value = shiny::h3("60%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                        valueBox(width = 12,subtitle = "Horas programadas respecto a las habilitadas",value = shiny::h3("79%", style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                                        valueBox(width = 12,subtitle = "Horas ocupadas respecto a las programadas",value = shiny::h3("80%", style = 'font-size:27px'),color = "teal",icon = icon("check"))))
+                                        valueBox(width = 12,subtitle = "Cupos programados totales 2022",value = shiny::h3(textOutput("cupos_programados_totales"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                        valueBox(width = 12,subtitle = "Cupos utilizados totales 2022",value = shiny::h3(textOutput("cupos_utilizados_totales"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                                        valueBox(width = 12,subtitle = "Cupos utilizados/cupos programados",value = shiny::h3(textOutput("cupos_utilizados_vs_programados"), style = 'font-size:27px'),color = "teal",icon = icon("check"))))
               
       ),
       tabItem(tabName = "menu5",
