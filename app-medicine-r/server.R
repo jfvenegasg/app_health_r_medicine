@@ -31,9 +31,10 @@ function(input, output, session) {
   
   #### Reporte quirofanos ####
   
+data<-openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7)
   #grafico utilización de quirofanos
   output$grafico<- renderEcharts4r({ 
-    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7) |>
+    data |>
     # datos<-pd$read_excel('modulos/data/set_de_datos_1.xlsx',sheet_name ="Horas")
     # datos<-datos[15:36,5:7]
     # datos |>

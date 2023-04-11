@@ -143,11 +143,84 @@
      "en": "Quotas used/scheduled quotas"
      },
      {
+     "es": "Días de estadia y pacientes intervenidos por mes",
+     "en": "Days of stay and patients operated per month"
+     },
+     {
+     "es": "Seleccion de especialidad",
+     "en": "Specialty selection"
+     },
+     {
+     "es": "Cirugía general",
+     "en": "General Surgery"
+     },
+     {
+     "es": "Cirugía cardiovascular",
+     "en": "Cardiovascular surgery"
+     },
+     {
+     "es": "Cirugía máxilofacial",
+     "en": "Maxillofacial Surgery"
+     },
+     {
+     "es": "Cirugía tórax",
+     "en": "Chest surgery"
+     },
+     {
+     "es": "Traumatología",
+     "en": "Traumatology"
+     },
+     {
+     "es": "Neurocirugía",
+     "en": "Neurosurgery"
+     },
+     {
+     "es": "Otorrinolaringología",
+     "en": "Otorhinolaryngology"
+     },
+     {
+     "es": "Oftalmología",
+     "en": "Ophthalmology"
+     },
+     {
+     "es": "Obstetricia y ginecología",
+     "en": "Obstetrics and gynecology"
+     },
+     {
+     "es": "Ginecología",
+     "en": "Gynecology"
+     },
+     {
+     "es": "Urología",
+     "en": "Urology"
+     },
+     {
+     "es": "Resto especialdiades",
+     "en": "Other specialties"
+     },
+     {
+     "es": "Todas",
+     "en": "All"
+     },
+     {
+     "es": "Días totales de estadía",
+     "en": "Total days of stay"
+     },
+     {
+     "es": "Pacientes intervenidos totales",
+     "en": "Total number of patients operated"
+     },
+     {
+     "es": "Días de estadía promedio por paciente",
+     "en": "Average days of stay per patient"
+     },
+     {
      "es": "",
      "en": ""
      }
      
+  
      
-
+     
   ]
 }
