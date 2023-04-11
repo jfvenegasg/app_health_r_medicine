@@ -5,4 +5,4 @@
 i18n <- Translator$new(translation_json_path = "modulos/data/translation_en.json")
 
 # si quieres cambiar a español,solo cambiar en por es y viceversa
-i18n$set_translation_language("es")
+i18n$set_translation_language("en")

@@ -5,7 +5,149 @@
     {
      "es": "Sistema de gestion HCM",
      "en": "Management System"
+     },
+     {
+     "es": "Mensaje 1",
+     "en": "Message 1"
+     },
+     {
+     "es": "Hoy",
+     "en": "Today"
+     },
+     {
+     "es": "Mi progreso",
+     "en": "My progress"
+     },
+     {
+     "es": "Inicio",
+     "en": "Main menu"
+     },
+     {
+     "es": "Reporte quirófanos",
+     "en": "Operating room report"
+     },
+     {
+     "es": "Análisis supenciones",
+     "en": "suspension analysis"
+     },
+     {
+     "es": "Suspenciones por causa",
+     "en": "Suspensions for cause"
+     },
+     {
+     "es": "Susp. por especialidad",
+     "en": "suspensions by specialty"
+     },
+     {
+     "es": "Hospitalización domiciliaria",
+     "en": "home hospitalization"
+     },
+     {
+     "es": "Dias de estadía",
+     "en": "days of stay"
+     },
+     {
+     "es": "Datos y estadísticas acerca de la programación y ocupación de quirófanos",
+     "en": "Data and statistics about operating room scheduling and occupancy"
+     },
+     {
+     "es": "Datos y estadísticas sobre las causas que generan suspensiones de cirugías",
+     "en": "Data and statistics on the causes that generate suspensions of surgeries"
+     },
+     {
+     "es": "Datos y estadísticas sobre la cantidad de suspensiones por especialidad",
+     "en": "Data and statistics on the number of suspensions by specialty"
+     },
+     {
+     "es": "Datos y estadísticas acerca de la programación y utilización de cupos de hospitalización domiciliaria",
+     "en": "Data and statistics about the scheduling and use of home hospitalization quotas"
+     },
+     {
+     "es": "Datos y estadísticas acerca de los días de estadía de los pacientes según tipo de cirugía y mes",
+     "en": "Data and statistics about the days of stay of the patients according to type of surgery and month"
+     },
+     {
+     "es": "Utilización de quirófanos",
+     "en": "Use of operating rooms"
+     },
+     {
+     "es": "Porcentaje promedio de ocupación quirófanos",
+     "en": "Average percentage of operating rooms occupancy"
+     },
+     {
+     "es": "Horas programadas respecto a las habilitadas",
+     "en": "Hours scheduled with respect to those enabled"
+     },
+     {
+     "es": "Horas ocupadas respecto a las programadas",
+     "en": "Busy hours compared to scheduled"
+     },
+     {
+     "es": "Motivos de suspención por mes",
+     "en": "Reasons for suspension per month"
+     },
+     {
+     "es": "Suspensiones totales año 2022",
+     "en": "Total suspensions year 2022"
+     },
+     {
+     "es": "Suspensiones debido a la causal paciente",
+     "en": "Suspensions due to patient cause"
+     },
+     {
+     "es": "Suspensiones debido a la causal equipo quirúrgico",
+     "en": "Suspensions due to surgical team cause"
+     },
+     {
+     "es": "Desgloce motivos de suspención cirugías",
+     "en": "Breakdown of reasons for suspension of surgeries"
+     },
+     {
+     "es": "Grafico de Pareto de causales; pacientes 15 Años Y Más",
+     "en": "Pareto chart of causals; Patients 15 Years And Over"
+     },
+     {
+     "es": "Grafico de Pareto de causales; todas las edades",
+     "en": "Pareto chart of causals; All ages"
+     },
+     {
+     "es": "Gráfico pareto de los motivos de suspención",
+     "en": "Pareto chart of reasons for suspension"
+     },
+     {
+     "es": "Distribución suspensiones por tipo de cirugía",
+     "en": "Distribution suspensions by type of surgery"
+     },
+     {
+     "es": "Distribución suspensiones por especialidad",
+     "en": "Suspension distribution by specialty"
+     },
+     {
+     "es": "Cantidad de Suspensiones por especialidad y tipo de cirugía",
+     "en": "Number of Suspensions by specialty and type of surgery"
+     },
+     {
+     "es": "Cupos programados y utilizados de hospitalización domiciliaria",
+     "en": "Scheduled and used quotas for home hospitalization"
+     },
+     {
+     "es": "Cupos programados totales 2022",
+     "en": "Total scheduled quotas 2022"
+     },
+     {
+     "es": "Cupos utilizados totales 2022",
+     "en": "Total quotas used 2022"
+     },
+     {
+     "es": "Cupos utilizados/cupos programados",
+     "en": "Quotas used/scheduled quotas"
+     },
+     {
+     "es": "",
+     "en": ""
      }
+     
+     
 
   ]
 }
