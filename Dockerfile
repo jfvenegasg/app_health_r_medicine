@@ -35,7 +35,8 @@ RUN R -q -e 'install.packages(c(\
               "lubridate", \
               "shinyWidgets", \
               "shinycssloaders", \
-              "reticulate" \
+              "reticulate", \
+              "shiny.i18n" \
             ), \
             repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-01-13"\
           )'
