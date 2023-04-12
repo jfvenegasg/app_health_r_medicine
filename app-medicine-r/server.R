@@ -33,7 +33,7 @@ function(input, output, session) {
   
   #grafico utilización de quirofanos
   output$grafico<- renderEcharts4r({ 
-    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7 ) |>
+    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7) |>
     # datos<-pd$read_excel('modulos/data/set_de_datos_1.xlsx',sheet_name ="Horas")
     # datos<-datos[15:36,5:7]
     # datos |>
@@ -71,13 +71,12 @@ function(input, output, session) {
 
   
   #### Analisis de suspensiones por causa####
-  
-  # Tiempo total adicional y de inactividad
+suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
+suspensiones<-subset(suspensiones, Descripcion=="% de total 15 Años Y Más junto con Causas De Suspensión Atribuibles A:") 
+    
   output$grafico_barra<- renderEcharts4r({ 
-    suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:146,cols = 1:4 )
-    # suspensiones<-xlsx::read.xlsx(file="modulos/data/datos_suspensiones_bd.xlsx",sheetIndex = 1, rowIndex = 1:146, colIndex= 1:4
-    #                               , as.data.frame = TRUE, header = TRUE)
-    data.frame(suspensiones) |>
+       data.frame(suspensiones) |>
+      
       echarts4r::group_by(Causa.de.suspension) |>
       echarts4r::e_chart(Mes) |>
       echarts4r::e_theme("walden")|> 
@@ -85,13 +84,18 @@ function(input, output, session) {
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"),formatter = echarts4r::e_tooltip_item_formatter("percent"))
   })
   
-  # Tiempo adicional y tiempo de inactividad promedio por cirugia
+  a<-mean(suspensiones$Valor[suspensiones$Causa.de.suspension=="PACIENTE"])
+  a<-sprintf("%0.2f%%", a*100)
+  output$porcentaje_paciente<-renderText({a})
+  
+  b<-mean(suspensiones$Valor[suspensiones$Causa.de.suspension=="EQUIPO QUIRÚRGICO"])
+  b<-sprintf("%0.2f%%", b*100)
+  output$porcentaje_equipo<-renderText({b})
+
+  
+datos_suspensiones_sankey<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
+  
   output$grafico_sankey<- renderEcharts4r({ 
-    
-    datos_suspensiones_sankey<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_sankey_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:36,cols = 1:3 )
-    # datos_suspensiones_sankey<-xlsx::read.xlsx(file="modulos/data/datos_suspensiones_sankey_bd.xlsx",sheetIndex = 1, rowIndex = 1:36, colIndex= 1:3
-    #                                            , as.data.frame = TRUE, header = TRUE)
-    
     data.frame(datos_suspensiones_sankey) |> 
       echarts4r::e_charts() |> 
       echarts4r::e_sankey(source, target, value,layoutIterations = 6) |> 
@@ -99,6 +103,8 @@ function(input, output, session) {
       echarts4r::e_theme("walden")|> 
       echarts4r::e_tooltip() 
   })
+  
+  output$susp_totales<-renderText({sum(datos_suspensiones_sankey[6:35,]$value)})
   
   # Grafico de pareto % de total 15 Años Y Más junto con Causas De Suspensión
   
@@ -215,8 +221,13 @@ function(input, output, session) {
       e_axis_labels(y = "Cupos", x = "Meses") |>
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
   })
-    
   
+  output$cupos_programados_totales<-renderText(sum(data_hospitalizacion$Número.cupos.programados))
+  output$cupos_utilizados_totales<-renderText(sum(data_hospitalizacion$Número.cupos.utilizados))
+  
+  c<-sum(data_hospitalizacion$Número.cupos.utilizados)/sum(data_hospitalizacion$Número.cupos.programados)
+  c<-sprintf("%0.2f%%", c*100)
+  output$cupos_utilizados_vs_programados<-renderText(c)  
   
 
 
