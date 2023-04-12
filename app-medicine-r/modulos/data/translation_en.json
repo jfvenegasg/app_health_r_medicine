@@ -215,6 +215,54 @@
      "en": "Average days of stay per patient"
      },
      {
+     "es": "Enero",
+     "en": "January"
+     },
+     {
+     "es": "Febrero",
+     "en": "February"
+     },
+     {
+     "es": "Marzo",
+     "en": "March"
+     },
+     {
+     "es": "Abril",
+     "en": "April"
+     },
+     {
+     "es": "Mayo",
+     "en": "May"
+     },
+     {
+     "es": "Junio",
+     "en": "June"
+     },
+     {
+     "es": "Julio",
+     "en": "July"
+     },
+     {
+     "es": "Agosto",
+     "en": "August"
+     },
+     {
+     "es": "Septiembre",
+     "en": "September"
+     },
+     {
+     "es": "Octubre",
+     "en": "October"
+     },
+     {
+     "es": "Noviembre",
+     "en": "November"
+     },
+     {
+     "es": "Diciembre",
+     "en": "December"
+     },
+     {
      "es": "",
      "en": ""
      }
