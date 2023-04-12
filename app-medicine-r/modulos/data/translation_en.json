@@ -27,15 +27,19 @@
      "en": "Operating room report"
      },
      {
-     "es": "Análisis supenciones",
+     "es": "Análisis suspensiones",
      "en": "suspension analysis"
      },
      {
-     "es": "Suspenciones por causa",
+     "es": "Suspensiones por causa",
      "en": "Suspensions for cause"
      },
      {
      "es": "Susp. por especialidad",
+     "en": "suspensions by specialty"
+     },
+     {
+     "es": "Suspensiones por especialidad",
      "en": "suspensions by specialty"
      },
      {
@@ -83,7 +87,7 @@
      "en": "Busy hours compared to scheduled"
      },
      {
-     "es": "Motivos de suspención por mes",
+     "es": "Motivos de suspensión por mes",
      "en": "Reasons for suspension per month"
      },
      {
@@ -99,7 +103,7 @@
      "en": "Suspensions due to surgical team cause"
      },
      {
-     "es": "Desgloce motivos de suspención cirugías",
+     "es": "Desgloce motivos de suspensión cirugías",
      "en": "Breakdown of reasons for suspension of surgeries"
      },
      {
@@ -111,7 +115,7 @@
      "en": "Pareto chart of causals; All ages"
      },
      {
-     "es": "Gráfico pareto de los motivos de suspención",
+     "es": "Gráfico pareto de los motivos de suspensión",
      "en": "Pareto chart of reasons for suspension"
      },
      {
