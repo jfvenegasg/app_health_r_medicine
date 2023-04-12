@@ -156,7 +156,7 @@ ui <-  dashboardPage(
               fluidRow(width=12,
                        box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, height = "560px",title = i18n$t("Días de estadia y pacientes intervenidos por mes"),status = "lightblue"),
                        column(width = 3,
-<<<<<<< HEAD
+
                               box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue",selectInput("selector_1","Seleccion de especialidad",
                                                                                                                             if(i18n$get_translation_language()=="es"){
                                                                                                                             choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
@@ -173,17 +173,7 @@ ui <-  dashboardPage(
                               valueBox(width = 12,subtitle = "Días totales de estadía",value = shiny::h3(textOutput("dias_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                               valueBox(width = 12,subtitle = "Pacientes intervenidos totales",value = shiny::h3(textOutput("pacientes_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                               valueBox(width = 12,subtitle = "Días de estadía promedio por paciente",value = shiny::h3(textOutput("días_de_estada_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),
-=======
-                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue",selectInput("selector_1",i18n$t("Seleccion de especialidad"),
-                                                                                                                         choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
-                                                                                                                                     "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
-                                                                                                                                     , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
-                                                                                                                                     , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
-                                                                                                                                     , "Resto especialdiades"="RESTO ESPECIALIDADES", "Todas"="TODAS"))),
-                              valueBox(width = 12,subtitle = i18n$t("Días totales de estadía"),value = shiny::h3(textOutput("dias_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                              valueBox(width = 12,subtitle = i18n$t("Pacientes intervenidos totales"),value = shiny::h3(textOutput("pacientes_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                              valueBox(width = 12,subtitle = i18n$t("Días de estadía promedio por paciente"),value = shiny::h3(textOutput("días_de_estada_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),
->>>>>>> a995ab866fb4d7d47f612575df058be6edc81938
+
                        
                        
               fluidRow(width=12,                
