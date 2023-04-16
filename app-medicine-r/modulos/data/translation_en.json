@@ -145,6 +145,14 @@
      {
      "es": "Cupos utilizados/cupos programados",
      "en": "Quotas used/scheduled quotas"
+     },
+     {
+     "es": "Seleccion de especialidad",
+     "en": "Specialty Selection"
+     },
+     {
+     "es": "Seleccion de mes",
+     "en": "Month Selection"
      }
 ]
 }

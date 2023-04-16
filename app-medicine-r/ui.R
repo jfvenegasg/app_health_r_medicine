@@ -157,14 +157,14 @@ ui <-  dashboardPage(
                        box(width=9,echarts4rOutput("dias_estada_mensual"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, height = "560px",title = i18n$t("Días de estadia y pacientes intervenidos por mes"),status = "lightblue"),
                        column(width = 3,
 
-                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue",selectInput("selector_1","Seleccion de especialidad",
+                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue",selectInput("selector_1",i18n$t("Seleccion de especialidad"),
                                                                                                                             if(i18n$get_translation_language()=="es"){
                                                                                                                             choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
                                                                                                                                      "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                      , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                      , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
                                                                                                                                      , "Resto especialdiades"="RESTO ESPECIALIDADES", "Todas"="TODAS")}
-                                                                                                                            else{choices = c("Genetal Surgery"="CIRUGÍA GENERAL","cardiovascular surgery"="CIRUGÍA CARDIOVASCULAR",
+                                                                                                                            else{choices = c("General Surgery"="CIRUGÍA GENERAL","Cardiovascular Surgery"="CIRUGÍA CARDIOVASCULAR",
                                                                                                                                              "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                              , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                              , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
@@ -179,9 +179,15 @@ ui <-  dashboardPage(
               fluidRow(width=12,                
                        box(width=9,echarts4rOutput("dias_estada_especialidad"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, height = "560px", title = i18n$t("Días de estadía y pacientes intervenidos por especialidad"),status = "lightblue"),
                        column(width = 3,
-                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue",selectInput("selector_2",i18n$t("Seleccion de mes"), choices = c("Enero"="enero","Febrero"="febrero",
+                              box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue",selectInput("selector_2",i18n$t("Seleccion de mes"),
+                                                                                                                                          if(i18n$get_translation_language()=="es"){
+                                                                                                                                                      choices = c("Enero"="enero","Febrero"="febrero",
                                                                                                                                                                       "Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
-                                                                                                                                                                      , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre", "Año 2022"="año 2022"))),
+                                                                                                                                                                      , "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre", "Año 2022"="año 2022")}
+                                                                                                                                          else{choices=c("January"="enero","February"="febrero",
+                                                                                                                                                         "March"="marzo", "April"="abril", "May"="mayo", "June"="junio", "July"="julio", "August"="agosto"
+                                                                                                                                                         , "September"="septiembre", "October"="obtubre", "November"="noviembre" , "December"="diciembre", "Año 2022"="año 2022")
+                                                                                                                                            })),
                               valueBox(width = 12,subtitle = i18n$t("Días totales de estadía"),value = shiny::h3(textOutput("dias_totales_mes"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                               valueBox(width = 12,subtitle = i18n$t("Pacientes intervenidos totales"),value = shiny::h3(textOutput("pacientes_totales_mes"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
                               valueBox(width = 12,subtitle = i18n$t("Días de estadía promedio por paciente"),value = shiny::h3(textOutput("días_de_estada_mes"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),

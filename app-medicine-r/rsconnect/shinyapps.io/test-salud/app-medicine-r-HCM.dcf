@@ -1,0 +1,13 @@
+name: app-medicine-r-HCM
+title: app-medicine-r-HCM
+username:
+account: test-salud
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8832876
+bundleId: 7081035
+url: https://test-salud.shinyapps.io/app-medicine-r-HCM/
+when: 1681320646.8083
+lastSyncTime: 1681320646.80831
+asMultiple: FALSE
+asStatic: FALSE
