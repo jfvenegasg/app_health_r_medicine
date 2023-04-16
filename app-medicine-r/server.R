@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+source("traductor.R")
 
 # Define server logic required to draw a histogram
 function(input, output, session) {
@@ -31,14 +32,11 @@ function(input, output, session) {
   
   #### Reporte quirofanos ####
   
+data<-openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7)
+data$Mes<-i18n$t(c("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre"))
   #grafico utilización de quirofanos
   output$grafico<- renderEcharts4r({ 
-    openxlsx::read.xlsx(xlsxFile ="modulos/data/set_de_datos_1.xlsx" ,sheet ="Horas" ,rows = 15:37,cols = 5:7) |>
-    # datos<-pd$read_excel('modulos/data/set_de_datos_1.xlsx',sheet_name ="Horas")
-    # datos<-datos[15:36,5:7]
-    # datos |>
-    # xlsx::read.xlsx(file="modulos/data/set_de_datos_1.xlsx",sheetIndex = 4, rowIndex = 15:37, colIndex= 5:7
-    #                 , as.data.frame = TRUE, header = TRUE) |> 
+    data |>
       echarts4r::group_by(Tipo.de.hora) |>
       echarts4r::e_chart(Mes) |>
       echarts4r::e_bar(Valor) |>

@@ -92,9 +92,9 @@ ui <-  dashboardPage(
                        bs4Dash::infoBox(width = 12,title = shiny::h3(i18n$t("Reporte quirófanos"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas acerca de la programación y ocupación de quirófanos"), 
                                         icon=shiny::icon("arrow-pointer"), tabName = "menu2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
               fluidRow(width=12,
-                       bs4Dash::infoBox(width = 6,title = shiny::h3(i18n$t("Supenciones por causa"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas sobre las causas que generan suspensiones de cirugías"), 
+                       bs4Dash::infoBox(width = 6,title = shiny::h3(i18n$t("Suspensiones por causa"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas sobre las causas que generan suspensiones de cirugías"), 
                                         icon=shiny::icon("arrow-pointer"), tabName = "menu3_1",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2),
-                       bs4Dash::infoBox(width = 6,title = shiny::h3(i18n$t("Supenciones por especialidad"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas sobre la cantidad de suspensiones por especialidad"), 
+                       bs4Dash::infoBox(width = 6,title = shiny::h3(i18n$t("Suspensiones por especialidad"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas sobre la cantidad de suspensiones por especialidad"), 
                                         icon=shiny::icon("arrow-pointer"), tabName = "menu3_2",color = "lightblue",fill=FALSE, iconElevation = 2,elevation = 2)),
               fluidRow(width=12,
                        bs4Dash::infoBox(width = 6,title = shiny::h3(i18n$t("Hospitalización domiciliaria"), style = 'font-size:30px'),subtitle=i18n$t("Datos y estadísticas acerca de la programación y utilización de cupos de hospitalización domiciliaria"), 
@@ -121,17 +121,17 @@ ui <-  dashboardPage(
       
       tabItem(tabName = "menu3_1",
               fluidRow(width=12,
-                       box(echarts4rOutput("grafico_barra"),title= i18n$t("Motivos de suspención por mes"),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
+                       box(echarts4rOutput("grafico_barra"),title= i18n$t("Motivos de suspensión por mes"),width=9,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2,status = "lightblue"),
                        bs4Dash::column(width=3,
                                        valueBox(width = 12,value = shiny::h3(textOutput("susp_totales"), style = 'font-size:27px'),color = "teal",subtitle=i18n$t("Suspensiones totales año 2022"),icon = icon("check")),
                                        valueBox(width = 12,value = shiny::h3(textOutput("porcentaje_paciente"), style = 'font-size:27px'),color = "teal",subtitle=i18n$t("Suspensiones debido a la causal paciente"),icon = icon("check")),
                                        valueBox(width = 12,value=shiny::h3(textOutput("porcentaje_equipo"), style = 'font-size:27px'),color = "teal",subtitle=i18n$t("Suspensiones debido a la causal equipo quirúrgico"),icon = icon("check")))),
               fluidRow(width=12,
-                       box(echarts4rOutput("grafico_sankey"),title= i18n$t("Desgloce motivos de suspención cirugías"),width=12,height="620px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
+                       box(echarts4rOutput("grafico_sankey"),title= i18n$t("Desgloce motivos de suspensión cirugías"),width=12,height="620px",headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue")),
               fluidRow(width=12,
                        box(width=6,echarts4rOutput("grafico_pareto_1"),title= i18n$t("Grafico de Pareto de causales; pacientes 15 Años Y Más"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
                        box(width=6,echarts4rOutput("grafico_pareto_2"),title= i18n$t("Grafico de Pareto de causales; todas las edades"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2),
-                       box(width=12,echarts4rOutput("grafico_pareto_causas"),height = "650px",title= i18n$t("Gráfico pareto de los motivos de suspención"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
+                       box(width=12,echarts4rOutput("grafico_pareto_causas"),height = "650px",title= i18n$t("Gráfico pareto de los motivos de suspensión"),headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2))
               
       ),
       tabItem(tabName = "menu3_2",
@@ -158,21 +158,23 @@ ui <-  dashboardPage(
                        column(width = 3,
 
                               box(width = 12,headerBorder = FALSE,collapsible = FALSE,closable = FALSE,elevation = 2, status = "lightblue",selectInput("selector_1",i18n$t("Seleccion de especialidad"),
-                                                                                                                            if(i18n$get_translation_language()=="es"){
-                                                                                                                            choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
+                                                                                                                         if(i18n$get_translation_language()=="es"){
+                                                                                                                           choices = c("Cirugía general"="CIRUGÍA GENERAL","Cirugía cardiovascular"="CIRUGÍA CARDIOVASCULAR",
+
                                                                                                                                      "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                      , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                      , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
                                                                                                                                      , "Resto especialdiades"="RESTO ESPECIALIDADES", "Todas"="TODAS")}
+
                                                                                                                             else{choices = c("General Surgery"="CIRUGÍA GENERAL","Cardiovascular Surgery"="CIRUGÍA CARDIOVASCULAR",
                                                                                                                                              "Cirugía máxilofacial"="CIRUGÍA MÁXILOFACIAL", "Cirugía tórax"="CIRUGÍA TÓRAX", "Traumatología"="TRAUMATOLOGÍA"
                                                                                                                                              , "Neurocirugía"="NEUROCIRUGÍA", "Otorrinolaringología"="OTORRINOLARINGOLOGÍA", "Oftalmología"="OFTALMOLOGÍA"
                                                                                                                                              , "Obstetricia y ginecología"="OBSTETRICIA Y GINECOLOGÍA", "Ginecología"="GINECOLOGÍA", "Urología"="UROLOGÍA"
                                                                                                                                              , "Resto especialdiades"="RESTO ESPECIALIDADES", "Todas"="TODAS")}
                                                                                                                             )),
-                              valueBox(width = 12,subtitle = "Días totales de estadía",value = shiny::h3(textOutput("dias_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                              valueBox(width = 12,subtitle = "Pacientes intervenidos totales",value = shiny::h3(textOutput("pacientes_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
-                              valueBox(width = 12,subtitle = "Días de estadía promedio por paciente",value = shiny::h3(textOutput("días_de_estada_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),
+                              valueBox(width = 12,subtitle = i18n$t("Días totales de estadía"),value = shiny::h3(textOutput("dias_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                              valueBox(width = 12,subtitle = i18n$t("Pacientes intervenidos totales"),value = shiny::h3(textOutput("pacientes_totales_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")),
+                              valueBox(width = 12,subtitle = i18n$t("Días de estadía promedio por paciente"),value = shiny::h3(textOutput("días_de_estada_especialidad"), style = 'font-size:27px'),color = "teal",icon = icon("check")))),
 
                        
                        
