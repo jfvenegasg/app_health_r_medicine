@@ -8,7 +8,6 @@
 #
 
 library(shiny)
-library(htmlwidgets)
 library(dplyr)
 library(openxlsx)
 library(echarts4r)
@@ -17,11 +16,8 @@ library(bs4Dash)
 library(reactable)
 library(MASS)
 library(config)
-library(htmltools)
 library(lubridate)
-library(shinyWidgets)
 library(shinycssloaders)
-library(reticulate)
 library(shiny.i18n)
 source("traductor.R")
 

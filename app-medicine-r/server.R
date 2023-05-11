@@ -8,7 +8,7 @@
 #
 
 library(shiny)
-source("traductor.R")
+#source("traductor.R")
 
 # Define server logic required to draw a histogram
 function(input, output, session) {

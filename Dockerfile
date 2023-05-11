@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y \
 # basic shiny functionality
 RUN R -q -e 'install.packages(c(\
               "shiny", \
-              "htmlwidgets", \
               "dplyr", \
               "openxlsx", \
               "echarts4r", \
@@ -31,11 +30,8 @@ RUN R -q -e 'install.packages(c(\
               "reactable", \
               "MASS", \
               "config", \
-              "htmltools", \
               "lubridate", \
-              "shinyWidgets", \
               "shinycssloaders", \
-              "reticulate", \
               "shiny.i18n" \
             ), \
             repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-01-13"\
