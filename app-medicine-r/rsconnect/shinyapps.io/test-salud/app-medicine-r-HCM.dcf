@@ -5,9 +5,9 @@ account: test-salud
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8832876
-bundleId: 7096116
+bundleId: 7205389
 url: https://test-salud.shinyapps.io/app-medicine-r-HCM/
-when: 1681664988.97423
-lastSyncTime: 1681664988.97425
+when: 1683824523.62677
+lastSyncTime: 1683824523.62679
 asMultiple: FALSE
 asStatic: FALSE
