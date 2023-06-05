@@ -207,7 +207,7 @@
      "en": "Urology"
      },
      {
-     "es": "Resto especialdiades",
+     "es": "Resto especialidades",
      "en": "Other specialties"
      },
      {
@@ -215,11 +215,11 @@
      "en": "All"
      },
      {
-     "es": "Días de estadía",
-     "en": "Days of stay"
+     "es": "Días totales de estadía",
+     "en": "Total days of stay"
      },
      {
-     "es": "Días totales de estadía",
+     "es": "Días de estadía",
      "en": "Total days of stay"
      },
      {
@@ -229,10 +229,6 @@
      {
      "es": "Días de estadía promedio por paciente",
      "en": "Average days of stay per patient"
-     },
-     {
-     "es": "Días de estadía y pacientes intervenidos por especialidad",
-     "en": "Days of stay and patients operated by specialty"
      },
      {
      "es": "Enero",
@@ -281,6 +277,278 @@
      {
      "es": "Diciembre",
      "en": "December"
+     },
+     {
+     "es": "Selección de mes",
+     "en": "month selection"
+     },
+     {
+     "es": "Días de estadía y pacientes intervenidos por especialidad",
+     "en": "Days of stay and patients operated by specialty"
+     },
+     {
+     "es": "% trabajo respecto a habilitado",
+     "en": "% hours of work compared to enabled"
+     },
+     {
+     "es": "% programado respecto a habilitado",
+     "en": "% scheduled hours compared to enabled"
+     },
+     {
+     "es": "Este dashboard es solo una version de prueba",
+     "en": "This dashboard is only a trial version"
+     },
+     {
+     "es": "PACIENTE",
+     "en": "Patient"
+     },
+     {
+     "es": "Paciente",
+     "en": "Patient"
+     },
+     {
+     "es": "EQUIPO QUIRÚRGICO",
+     "en": "Surgical equipment"
+     },
+     {
+     "es": "Equipo Quirurgico",
+     "en": "Surgical equipment"
+     },
+     {
+     "es": "ADMINISTRATIVAS",
+     "en": "Administrative"
+     },
+     {
+     "es": "Administrativo",
+     "en": "Administrative"
+     },
+     {
+     "es": "EMERGENCIAS",
+     "en": "Emergencies"
+     },
+     {
+     "es": "Emergencias",
+     "en": "Emergencies"
+     },
+     {
+     "es": "UNIDAD DE APOYO CLÍNICO",
+     "en": "Clinical support unit"
+     },
+     {
+     "es": "Unidades de apoyo clínico",
+     "en": "Clinical support units"
+     },
+     {
+     "es": "INFRAESTRUCTURA",
+     "en": "Infrastructure"
+     },
+     {
+     "es": "Suspensiones",
+     "en": "Suspensions"
+     },
+     {
+     "es": "Patología aguda",
+     "en": "Acute pathology"
+     },
+     {
+     "es": "No se presenta",
+     "en": "Does not show up"
+     },
+     {
+     "es": "Sin suspensión de anticoagulante y otras drogas proscritas",
+     "en": "Without suspension of anticoagulant and other prescribed drugs"
+     },
+     {
+     "es": "Rechaza Cirugía",
+     "en": "Refuses Surgery"
+     },
+     {
+     "es": "Patología crónica descompensada",
+     "en": "Decompensated chronic pathology"
+     },
+     {
+     "es": "Sin indicación quirúrgica",
+     "en": "No surgical indication"
+     },
+     {
+     "es": "Anticipación de círugia por agudización de patología",
+     "en": "Anticipation of surgery due to exacerbation of pathology"
+     },
+     {
+     "es": "Estudio incompleto",
+     "en": "Incomplete study"
+     },
+     {
+     "es": "Falta de ayuno",
+     "en": "Lack of fasting"
+     },
+     {
+     "es": "Falta de preparación de piel, intestinal, antibiótica u otra específica",
+     "en": "Lack of skin, intestinal, antibiotic or other specific preparation"
+     },
+     {
+     "es": "Exámenes alterados no corregidos",
+     "en": "Uncorrected altered exams"
+     },
+     {
+     "es": "Patología no informada, no conocida (alergia al látex)",
+     "en": "Pathology not reported, not known (allergy to latex)"
+     },
+     {
+     "es": "Paciente fallece",
+     "en": "Patient dies"
+     },
+     {
+     "es": "No se ubica",
+     "en": "Not located"
+     },
+     {
+     "es": "Descompensación en pabellón",
+     "en": "Pavilion decompensation"
+     },
+     {
+     "es": "Prolongación de tabla",
+     "en": "Surgical table extension"
+     },
+     {
+     "es": "Falta / Disponibilidad de cirujano",
+     "en": "Lack / Availability of surgeon"
+     },
+     {
+     "es": "Falta / Disponibilidad de Técnico Paramédico",
+     "en": "Lack / Availability of Paramedic Technician"
+     },
+     {
+     "es": "Falta / Disponibilidad de Anestesiólogo",
+     "en": "Lack / Availability of Anesthesiologist"
+     },
+     {
+     "es": "Falta disponibilidad de cama UPC",
+     "en": "Lack of availability of UPC bed"
+     },
+     {
+     "es": "Error de programación",
+     "en": "Scheduling error"
+     },
+     {
+     "es": "Reemplazo por urgencia",
+     "en": "Emergency replacement"
+     },
+     {
+     "es": "Documentación incompleta",
+     "en": "Incomplete documentation"
+     },
+     {
+     "es": "Falta de insumos / stock insuficiente",
+     "en": "Lack of supplies / insufficient stock"
+     },
+     {
+     "es": "Instrumental incompleto o no disponible",
+     "en": "Instrumentation incomplete or not available"
+     },
+     {
+     "es": "Equipamiento no operativo",
+     "en": "Non-operative equipment"
+     },
+     {
+     "es": "Falla coordinación unidad de imagenología",
+     "en": "Imaging unit coordination fails"
+     },
+     {
+     "es": "Falta medicamentos / stock insuficiente",
+     "en": "Lack of medicines / insufficient stock"
+     },
+     {
+     "es": "Emergencia sanitaria COVID-19: Resguardo de usuarios y personal de salud",
+     "en": "COVID-19 health emergency: Protection of users and health personnel"
+     },
+     {
+     "es": "Porcentaje anual",
+     "en": "Annual percentage"
+     },
+     {
+     "es": "Acumulado",
+     "en": "Accumulated"
+     },
+     {
+     "es": "Número de cupos programados",
+     "en": "Number of scheduled quotas"
+     },
+     {
+     "es": "Número de cupos utilizados",
+     "en": "Number of quotas used"
+     },
+     {
+     "es": "Cirugía mayor",
+     "en": "Major surgery"
+     },
+     {
+     "es": "Cirugía menor",
+     "en": "Minor surgery"
+     },
+     {
+     "es": "Examen imagenología",
+     "en": "Imaging exam"
+     },
+     {
+     "es": "Procedimiento",
+     "en": "Procedure"
+     },
+     {
+     "es": "Cirugía digestiva alta",
+     "en": "Upper digestive surgery"
+     },
+     {
+     "es": "Cirugía infantil",
+     "en": "Child surgery"
+     },
+     {
+     "es": "Cirugía vascular",
+     "en": "Vascular surgery"
+     },
+     {
+     "es": "Obstetricia",
+     "en": "Obstetrics"
+     },
+     {
+     "es": "Cirugía de mamas",
+     "en": "Breast surgery"
+     },
+     {
+     "es": "Cardiología",
+     "en": "Cardiology"
+     },
+     {
+     "es": "Radiología",
+     "en": "Radiology"
+     },
+     {
+     "es": "Psiquiatría",
+     "en": "Psychiatry"
+     },
+     {
+     "es": "Gastroenterología",
+     "en": "Gastroenterology"
+     },
+     {
+     "es": "Cirugía oncológica",
+     "en": "Oncologic surgery"
+     },
+     {
+     "es": "Cantidad",
+     "en": "Quantity"
+     },
+     {
+     "es": "Año 2022",
+     "en": "Year 2022"
+     },
+     {
+     "es": "Días de estadía prequirurgicos totales",
+     "en": "Total days of pre-surgical stay"
+     },
+     {
+     "es": "",
+     "en": ""
      }
   ]
 }
