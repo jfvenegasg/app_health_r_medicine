@@ -70,12 +70,17 @@ data$Tipo.de.hora<-i18n$t(data$Tipo.de.hora)
 
   
   #### Analisis de suspensiones por causa####
-suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:145,cols = 1:4 )
-suspensiones$Mes<-i18n$t(suspensiones$Mes)
-suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
-suspensiones<-subset(suspensiones, Descripcion=="% de total Suspensiones totales junto con Causas De Suspensión Atribuibles A:") 
-
+  suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:145,cols = 1:4 )
+  suspensiones$Mes<-i18n$t(suspensiones$Mes)
+  suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
+  suspensiones<-subset(suspensiones, Descripcion=="% de total Suspensiones totales junto con Causas De Suspensión Atribuibles A:") 
+  
 output$grafico_barra<- renderEcharts4r({ 
+     suspensiones<-openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_suspensiones_bd.xlsx" ,sheet ="Sheet1" ,rows = 1:145,cols = 1:4 )
+     suspensiones$Mes<-i18n$t(suspensiones$Mes)
+     suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
+     suspensiones<-subset(suspensiones, Descripcion=="% de total Suspensiones totales junto con Causas De Suspensión Atribuibles A:")
+  
       suspensiones |>
       echarts4r::group_by(Causa.de.suspension) |>
       echarts4r::e_chart(Mes) |>
