@@ -206,7 +206,6 @@ suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
   
   output$grafico_hospitalizacion<- renderEcharts4r({ 
     data_hospitalizacion |>
-      #echarts4r::group_by(Causa.de.suspension) |>
       echarts4r::e_chart(Componentes) |>
       echarts4r::e_theme("walden")|> 
       echarts4r::e_bar(Número.cupos.programados, name = i18n$t("Número de cupos programados")) |>
@@ -253,7 +252,7 @@ suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
 output$grafico_circular1<- renderEcharts4r({ 
   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
     echarts4r::e_chart(Tipo) |>
-    echarts4r::e_pie(cantidad, radius = c("40%", "70%")) |>
+    echarts4r::e_pie(cantidad, radius = c("40%", "70%"), name= i18n$t("Cantidad")) |>
     echarts4r::e_theme("walden")|>
     echarts4r::e_labels(show = TRUE,
                         formatter = "{d}%",
@@ -265,7 +264,7 @@ output$grafico_circular2<- renderEcharts4r({
   aggregate(cantidad ~ Especialidad, data=susp_esp,FUN = sum) |> 
     dplyr::arrange(Especialidad)|>
     echarts4r::e_chart(Especialidad) |>
-    echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE) |>
+    echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE, name= i18n$t("Cantidad")) |>
     echarts4r::e_theme("walden")|>
     echarts4r::e_labels(show = TRUE,
                         formatter = "{d}%",
@@ -324,9 +323,9 @@ output$dias_estada_especialidad<- renderEcharts4r({
       subset(dias_estada2,Mes==input$selector_2) |>
       dplyr::arrange(Dias.de.estada.promedio)|>
       echarts4r::e_chart(Especialidad) |>
-      echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = "Días de estadía prequirurgicos totales") |>
-      echarts4r::e_bar(Pacientes.intervenidos.totales., name = "Pacientes intervenidos totales") |>
-      echarts4r::e_line(Dias.de.estada.promedio, y_index =1,name = "Días de estadía promedio por paciente") |> 
+      echarts4r::e_bar(Dias.de.estada.prequirurgicos.totales,name = i18n$t("Días de estadía prequirurgicos totales")) |>
+      echarts4r::e_bar(Pacientes.intervenidos.totales., name = i18n$t("Pacientes intervenidos totales")) |>
+      echarts4r::e_line(Dias.de.estada.promedio, y_index =1,name = i18n$t("Días de estadía promedio por paciente")) |> 
       echarts4r::e_theme("walden")|> 
       echarts4r::e_x_axis(axisLabel = list(interval = 0, rotate = 45, fontSize=9)) |>
       echarts4r::e_dims(height = "500px") |>
