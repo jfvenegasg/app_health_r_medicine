@@ -247,7 +247,7 @@ suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
 output$grafico_circular1<- renderEcharts4r({ 
   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
     echarts4r::e_chart(Tipo) |>
-    echarts4r::e_pie(cantidad, radius = c("40%", "70%")) |>
+    echarts4r::e_pie(cantidad, radius = c("40%", "70%"), name= i18n$t("Cantidad")) |>
     echarts4r::e_theme("walden")|>
     echarts4r::e_labels(show = TRUE,
                         formatter = "{d}%",
@@ -259,7 +259,7 @@ output$grafico_circular2<- renderEcharts4r({
   aggregate(cantidad ~ Especialidad, data=susp_esp,FUN = sum) |> 
     dplyr::arrange(Especialidad)|>
     echarts4r::e_chart(Especialidad) |>
-    echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE) |>
+    echarts4r::e_pie(cantidad, radius = c("40%", "70%"),legend = TRUE, name= i18n$t("Cantidad")) |>
     echarts4r::e_theme("walden")|>
     echarts4r::e_labels(show = TRUE,
                         formatter = "{d}%",
