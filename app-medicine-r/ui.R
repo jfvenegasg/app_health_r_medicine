@@ -23,37 +23,7 @@ source("traductor.R")
 
 ui <-  dashboardPage(
 
-  dashboardHeader(title = i18n$t("Sistema de gestion HCM"),rightUi = dropdownMenu(
-    badgeStatus = "danger",
-    type = "messages",
-    messageItem(
-      inputId = "triggerAction1",
-      message = i18n$t("Mensaje 1"),
-      from = "Juan Venegas",
-      image = "https://adminlte.io/themes/v3/dist/img/user3-128x128.jpg",
-      time = i18n$t("Hoy"),
-      color = "lime"
-    )
-  ),leftUi = tagList(
-    dropdownMenu(
-      badgeStatus = "info",
-      type = "notifications",
-      notificationItem(
-        inputId = "triggerAction2",
-        text = "Error!",
-        status = "danger"
-      )
-    ),
-    dropdownMenu(
-      badgeStatus = "info",
-      type = "tasks",
-      taskItem(
-        inputId = "triggerAction3",
-        text = i18n$t("Mi progreso"),
-        color = "orange",
-        value = 10
-      )
-    ))),
+  dashboardHeader(title = i18n$t("Sistema de gestion HCM")),
   dashboardSidebar(side = "top", visible = FALSE, status = "teal",
                    sidebarMenu(
                      id = "sidebar",
