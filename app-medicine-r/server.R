@@ -325,7 +325,7 @@ output$días_de_estada_especialidad<- renderText({ mean(dias_estada$Dias.de.esta
 #"Marzo"="marzo", "Abril"="abril", "Mayo"="mayo", "Junio"="junio", "Julio"="julio", "Agosto"="agosto"
 #, "Septiembre"="septiembre", "Octubre"="obtubre", "Noviembre"="noviembre" , "Diciembre"="diciembre")),
 
-dias_estada2<-subset(dias_estada, !(Especialidad %in% c("TODAS")))
+dias_estada2<-subset(dias_estada, !(Especialidad %in% c(i18n$t("Todas"))))
 
 output$dias_estada_especialidad<- renderEcharts4r({ 
       #subset(dias_estada,Mes=="enero") |> 
