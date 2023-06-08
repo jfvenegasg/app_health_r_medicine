@@ -231,19 +231,20 @@ suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
 
 
   #### Análisis de suspensiones por especialidad ####
-  susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 )) 
-  susp_esp$Tipo<-i18n$t(susp_esp$Tipo)
-  susp_esp$Especialidad<-i18n$t(susp_esp$Especialidad)
-  
+
   output$grafico_susp_esp<- renderEcharts4r({ 
+    susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 )) 
+    susp_esp$Tipo<-i18n$t(susp_esp$Tipo)
+    susp_esp$Especialidad<-i18n$t(susp_esp$Especialidad)
+    
     susp_esp |>
     data.frame(susp_esp) |>
       echarts4r::group_by(Tipo) |>
       echarts4r::e_chart(Especialidad) |>
       echarts4r::e_theme("walden")|> 
-      echarts4r::e_bar(cantidad,stack="Tipo", name= i18n$t("Cantidad")) |>
+      echarts4r::e_bar(cantidad,stack="Especialidad") |>
       echarts4r::e_flip_coords() |>
-      e_grid(left = "15%")|>
+      echarts4r::e_grid(left = "15%")|>
       echarts4r::e_tooltip(trigger = "item",axisPointer = list(type = "shadow"))
 })
 
