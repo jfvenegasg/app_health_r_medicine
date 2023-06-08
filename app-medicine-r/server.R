@@ -250,6 +250,10 @@ suspensiones$Causa.de.suspension<-i18n$t(suspensiones$Causa.de.suspension)
 
 
 output$grafico_circular1<- renderEcharts4r({ 
+  susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 )) 
+  susp_esp$Tipo<-i18n$t(susp_esp$Tipo)
+  susp_esp$Especialidad<-i18n$t(susp_esp$Especialidad)
+  
   aggregate(cantidad ~ Tipo, data=susp_esp,FUN = sum) |> 
     echarts4r::e_chart(Tipo) |>
     echarts4r::e_pie(cantidad, radius = c("40%", "70%"), name= i18n$t("Cantidad")) |>
@@ -261,6 +265,10 @@ output$grafico_circular1<- renderEcharts4r({
 })
 
 output$grafico_circular2<- renderEcharts4r({ 
+  susp_esp<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_supensiones_por_especialidad.xlsx" ,sheet ="Hoja1" ,rows = 1:73,cols = 13:15 )) 
+  susp_esp$Tipo<-i18n$t(susp_esp$Tipo)
+  susp_esp$Especialidad<-i18n$t(susp_esp$Especialidad)
+  
   aggregate(cantidad ~ Especialidad, data=susp_esp,FUN = sum) |> 
     dplyr::arrange(Especialidad)|>
     echarts4r::e_chart(Especialidad) |>
