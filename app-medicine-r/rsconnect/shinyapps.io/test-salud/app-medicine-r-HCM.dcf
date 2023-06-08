@@ -1,13 +1,24 @@
 name: app-medicine-r-HCM
+<<<<<<< HEAD
 title: app-medicine-r-HCM
+=======
+title:
+>>>>>>> Anastasia
 username:
 account: test-salud
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 8832876
+<<<<<<< HEAD
 bundleId: 7205389
 url: https://test-salud.shinyapps.io/app-medicine-r-HCM/
 when: 1683824523.62677
 lastSyncTime: 1683824523.62679
+=======
+bundleId: 7318705
+url: https://test-salud.shinyapps.io/app-medicine-r-HCM/
+when: 1686183814.74168
+lastSyncTime: 1686183814.74169
+>>>>>>> Anastasia
 asMultiple: FALSE
 asStatic: FALSE
