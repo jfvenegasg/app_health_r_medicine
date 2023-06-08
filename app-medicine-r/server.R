@@ -296,7 +296,7 @@ output$grafico_circular2<- renderEcharts4r({
 dias_estada<-data.frame(openxlsx::read.xlsx(xlsxFile ="modulos/data/datos_dias_estada.xlsx" ,sheet ="Hoja1" ,rows = 1:169,cols = c(1,2,3,4,9) ))
 dias_estada$Especialidad<-i18n$t(dias_estada$Especialidad)
 dias_estada$Mes<-i18n$t(dias_estada$Mes)
-dias_estada1<-subset(dias_estada, !(Mes %in% c("Año 2022")))
+dias_estada1<-subset(dias_estada, !(Mes %in% c(i18n$t("Año 2022"))))
 
 output$dias_estada_mensual<- renderEcharts4r({ 
       #subset(dias_estada,Especialidad=="CIRUGÍA GENERAL") |> 
